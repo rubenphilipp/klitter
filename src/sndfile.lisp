@@ -12,12 +12,15 @@
 ;;; PURPOSE
 ;;; Implementation of the sndfile class. This class holds general information
 ;;; about sound files (e.g. duration, number of channels etc.) but does not
-;;; contain the sound file itself. 
+;;; contain the sound file itself.
+;;;
+;;; This implementation is loosely based on the sndfile class of
+;;; slippery-chicken (http://github.com/mdedwards/slippery-chicken)
 ;;;
 ;;; CLASS HIERARCHY
 ;;; named-object -> sndfile
 ;;;
-;;; $$ Last modified:  17:13:32 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  18:44:18 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -44,6 +47,75 @@
    (sample-rate :accessor sample-rate :initform nil)))
 
 
+(defmethod initialize-instance :after ((sf sndfile) &rest initargs)
+  (declare (ignore initargs))
+  (setf (slot-value sf 'start) (mins-secs-to-secs (start sf))
+        (slot-value sf 'end) (mins-secs-to-secs (end sf))
+        (slot-value sf 'duration) (mins-secs-to-secs (duration sf)))
+  (when (and (duration sf) (end sf))
+    (error "sndfile::initialize-instance: ~
+            The duration and end slots annot both be specified! ~%~a"
+           sf))
+  (update sf))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; This method updates/initializes the values/slots of the sndfile-object.
+
+(defmethod update ((sf sndfile) &key ignore)
+  (declare (ignore ignore))
+  ;; test if path is correctly set and populate data with the path unless
+  ;; there is data specified
+  (let ((path (path sf)))
+    (when path
+      (unless (and path (probe-file path))
+        (error "sndfile::update: ~
+                Data slot of sndfile must be set to an existing sound file:~%~a"
+               path))
+      (unless (data sf)
+        (setf (slot-value sf 'data) path))
+      ;; get basic information of the sound file
+      (setf (snd-duration sf) (clm::sound-duration path)
+            (channels sf) (clm::sound-chans path)
+            (sample-rate sf) (clm::sound-srate path))
+      (cond ((and (not (end sf)) (duration sf))
+             (set-end sf))
+            ((and (not (duration sf)) (end sf)) 
+             (set-dur sf))
+            ((and (not (end sf)) (not (duration sf)) (snd-duration sf))
+             (setf (slot-value sf 'end) (snd-duration sf))
+             (set-dur sf)))
+      (let ((st (start sf))
+            (end (end sf)))
+        (when (< st 0)
+          (error "sndfile::update: start < 0???: ~a" sf))
+        (when (and end (<= end st))
+          (error "sndfile::update: end <= start???: ~a" sf))
+        ;; MDE Thu Jan 28 16:55:48 2021, Heidhausen -- signal a warning only and
+        ;; adjust  
+        (when (and (snd-duration sf) (> end (snd-duration sf)))
+          (warn "sndfile::update: ~
+                 Given end point (or duration: ~a) ~%  is > sound duration: ~
+                 ~a ~%~a"
+                end (snd-duration sf) sf)
+          (setf (slot-value sf 'end) (snd-duration sf))
+          (set-dur sf))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod set-dur ((sf sndfile))
+  (let ((end (end sf))
+        (start (start sf)))
+    (when (and start end)
+      (setf (slot-value sf 'duration) (- end start)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod set-end ((sf sndfile))
+  (let ((dur (duration sf))
+        (start (start sf)))
+    (when (and start dur)
+      (setf (slot-value sf 'end) (+ start dur)))))
    
 
 

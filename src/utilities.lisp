@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  15:18:11 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  17:17:07 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -72,6 +72,71 @@
                (trailing-slash
                 (directory-namestring (truename *load-pathname*)))
                file))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/mins-secs-to-secs
+;;; DESCRIPTION
+;;; Derive the number of seconds from a minutes-seconds value that is indicated
+;;; as a string of the form "0:00.000" or a two-item list in the form '(minutes
+;;; seconds) or three-item list in the form '(minutes seconds milliseconds)
+;;;
+;;; Courtesy of Michael Edwards (http://github.com/mdedwards/slippery-chicken)
+;;; 
+;;; ARGUMENTS
+;;; - A time in minutes and seconds, as described above.
+;;;
+;;; OPTIONAL ARGUMENTS
+;;; - if a string is to be passed, then a character that denotes the separator
+;;; between minutes and seconds. Default = #\:
+;;; 
+;;; RETURN VALUE
+;;; A decimal number that is a number in seconds.
+;;; 
+;;; EXAMPLE
+#|
+(mins-secs-to-secs '(2 1))
+=> 121.0
+(mins-secs-to-secs '(16 59 534)))
+=> 1019.534 
+(mins-secs-to-secs "3:06.829"))
+=> 186.829
+;; using a different separator character between minutes and seconds
+(mins-secs-to-secs "3-36.29" #\-) 0.0001)
+=> 216.29
+|#
+;;; SYNOPSIS
+(defun mins-secs-to-secs (time &optional (post-mins #\:))
+;;; ****
+  (flet ((secs-msecs (secs msecs)
+           (when (or (> secs 60)
+                     (> msecs 1000))
+             (error "utilities::mins-secs-to-secs: secs = ~a ~
+                               millisecs = ~a???" secs msecs))))
+    (cond ((not time) nil)
+          ((numberp time) time)
+          ;; MDE Thu Aug 29 13:30:34 2019 -- allow strings like "12:36.23"
+          ((stringp time) (mins-secs-to-secs-aux time post-mins))
+          ((= 2 (length time))
+           (let ((mins (first time))
+                 (secs (second time)))
+             (secs-msecs secs 0)
+             (+ secs (* 60.0 mins))))
+          ((= 3 (length time))
+           (let ((mins (first time))
+                 (secs (second time))
+                 (msecs (third time)))
+             (secs-msecs secs msecs)
+             (+ secs (/ msecs 1000.0) (* 60.0 mins))))
+          (t (error "utilities::mins-secs-to-secs: arg must be a 2- or ~
+                         3-element list (mins secs [millisecs]): ~a"
+                    time)))))
+
+(defun mins-secs-to-secs-aux (string &optional (post-mins ":"))
+  (let* ((pos (position post-mins string))
+         (mins (read-from-string (subseq string 0 pos)))
+         (secs (read-from-string (subseq string (1+ pos)))))
+    (+ (* 60.0 mins) secs)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utilities.lisp

@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  16:35:49 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  19:28:18 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -30,6 +30,12 @@
   `(5am:test ,name
      ,@body))
 
+(defmacro test-pathname (path)
+  `(namestring (asdf::SYSTEM-RELATIVE-PATHNAME :klitter
+                                               (concatenate 'string
+                                                            "tests/"
+                                                            ,path))))
+
 (defun run-tests ()
   (run! 'klitter))
 
@@ -40,9 +46,25 @@
 
 ;;; test trailing slash
 ;;; RP  Sat Jul 15 14:36:07 2023
-(test trailing-slash
+(test test-trailing-slash
   (is (equal "/trailing/test/"
              (klitter::trailing-slash "/trailing/test"))))
+
+
+;;; test sndfile
+;;; RP  Sat Jul 15 18:39:44 2023
+(test test-sndfile1
+  (let* ((path
+           ;; necessary as asdf::test-system does not work
+           ;; with *load-pathname*
+           (test-pathname "snd/kalimba.wav"))
+         (sndfile (make-instance 'klitter::sndfile
+                                 :path path)))
+    (is (and
+         (= (klitter::sample-rate sndfile) 48000)
+         (= (klitter::channels sndfile) 2)))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp
