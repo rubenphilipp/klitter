@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  14:45:40 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  14:53:28 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -28,7 +28,7 @@
 ;;; 
 ;;; DESCRIPTION
 ;;; This function ensures that a (path) string ends with a trailing slash.
-;;; NB: This function is borrowed from Michael Edward's slippery-chicken.
+;;; NB: This function is borrowed from Michael Edwards's slippery-chicken.
 ;;;
 ;;; ARGUMENTS
 ;;; A string containing the path to be checked and corrected.
@@ -56,7 +56,7 @@
 ;;; DESCRIPTION
 ;;; This function returns the full path to a file reilative to the directory of
 ;;; the current lisp file.
-;;; NB: This function is borrowed from Michael Edward's slippery-chicken.
+;;; NB: This function is borrowed from Michael Edwards's slippery-chicken.
 ;;;
 ;;; ARGUMENTS
 ;;; - A string indicating the filename (or pathname) to the file relative to
