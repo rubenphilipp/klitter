@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> sndfile
 ;;;
-;;; $$ Last modified:  18:44:18 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  19:31:39 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,6 +57,16 @@
             The duration and end slots annot both be specified! ~%~a"
            sf))
   (update sf))
+
+
+(defmethod print-object :before ((sf sndfile) stream)
+  (format stream "~%SNDFILE: path: ~a, ~
+                    ~%         snd-duration: ~a, channels: ~a, ~
+                    ~%         start: ~a, end: ~a, amplitude: ~a, duration: ~a~
+                    ~%         description: ~a"
+          (path sf) (snd-duration sf) (channels sf) (start sf)
+          (end sf) (amplitude sf) (duration sf)
+          (description sf)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

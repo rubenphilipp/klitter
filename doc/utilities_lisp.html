@@ -42,12 +42,49 @@
 <p class="item_name">PURPOSE</p>
 <pre> Utility functions for klitter.
 
- $$ Last modified:  15:18:11 Sat Jul 15 2023 CEST
+ $$ Last modified:  17:17:07 Sat Jul 15 2023 CEST
+</pre>
+
+<hr />
+<a name="utilities2fmins2dsecs2dto2dsecs"></a>
+<a name="robo7"></a><h2>utilities/mins-secs-to-secs [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre> Derive the number of seconds from a minutes-seconds value that is indicated
+ as a string of the form "0:00.000" or a two-item list in the form '(minutes
+ seconds) or three-item list in the form '(minutes seconds milliseconds)
+
+ Courtesy of Michael Edwards (<a href="http://github.com/mdedwards/slippery-chicken)">http://github.com/mdedwards/slippery-chicken)</a>
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A time in minutes and seconds, as described above.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> - if a string is to be passed, then a character that denotes the separator
+ between minutes and seconds. Default = #\:
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A decimal number that is a number in seconds.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>mins-secs-to-secs</strong> '(2 1))
+=&gt; 121.0
+(<strong>mins-secs-to-secs</strong> '(16 59 534)))
+=&gt; 1019.534 
+(<strong>mins-secs-to-secs</strong> "3:06.829"))
+=&gt; 186.829
+;; using a different separator character between minutes and seconds
+(<strong>mins-secs-to-secs</strong> "3-36.29" #\-) 0.0001)
+=&gt; 216.29
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>mins-secs-to-secs</strong> (time &amp;optional (post-mins #\:))
 </pre>
 
 <hr />
 <a name="utilities2fpath2dfrom2dsame2ddir"></a>
-<a name="robo6"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
+<a name="robo8"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -74,7 +111,7 @@
 
 <hr />
 <a name="utilities2ftrailing2dslash"></a>
-<a name="robo7"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+<a name="robo9"></a><h2>utilities/trailing-slash [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -99,7 +136,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-15 16:45:53</p>
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-15 19:32:49</p>
 </div> <!-- footer -->
 </body>
 </html>
