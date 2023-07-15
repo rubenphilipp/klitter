@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****h* utilities
+;;; ****h* klitter/utilities
 ;;; NAME
 ;;; utilities
 ;;; 
@@ -12,14 +12,14 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  14:28:05 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  14:45:40 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****f* trailing-slash
+;;; ****f* klitter/trailing-slash
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -46,7 +46,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****f* path-from-same-dir
+;;; ****f* klitter/path-from-same-dir
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
