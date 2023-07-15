@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>globals.lisp</title>
+<!-- Source: ./src/globals.lisp -->
+<!-- Generated with ROBODoc Version 4.99.44 (Nov 13 2022) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="./masterindex.html#top">Index</a>
+<a class="menuitem" href="./robo_processes.html#top">Process</a>
+<a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="klitter2fglobals"></a>
+<a name="robo0"></a><h2>klitter/globals [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>globals</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> Definition of the configuration data and <strong>globals</strong> for klitter.
+
+ CLASS HIERARCHY
+
+
+ $$ Last modified:  16:17:44 Sat Jul 15 2023 CEST
+</pre>
+
+<hr />
+<a name="globals2f2bkr2dconfig2ddata2b"></a>
+<a name="robo2"></a><h2>globals/+kr-config-data+ [ Process ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">globals</a> ] [ <a href="./robo_processes.html#robo_top_of_doc">Process</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>+kr-config-data+</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> A global holding information about the configuration of klitter (e.g.
+ paths to executables, output file preferences etc.).
+ 
+ $$ Last modified:  16:31:46 Sat Jul 15 2023 CEST
+ 
+ The full path to the Csound command. This is required in order to
+ play/render Csound scores. 
+ The path to the sonic-annotator binary, which is used to run the
+ analyses done with VAMP-plugins.
+ The default directory for file output.
+</pre>
+
+<hr />
+<a name="globals2fget2dkr2dconfig"></a>
+<a name="robo3"></a><h2>globals/get-kr-config [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">globals</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns the value of a configuration setting from the global
+ <a href="#robo2">+kr-config-data+</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The value of the <a href="#robo2">+kr-config-data+</a> element.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>get-kr-config</strong> (key)
+</pre>
+
+<hr />
+<a name="globals2fset2dkr2dconfig"></a>
+<a name="robo4"></a><h2>globals/set-kr-config [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">globals</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Set the value of a element in the <a href="#robo2">+kr-config-data+</a> global.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The key to the element in <a href="#robo2">+kr-config-data+</a> (e.g. :csound-command)
+ - The new value.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The new value of the config element.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>set-kr-config</strong> (key value)
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/globals.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-15 16:33:04</p>
+</div> <!-- footer -->
+</body>
+</html>
