@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  19:28:18 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  19:41:55 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -63,6 +63,20 @@
     (is (and
          (= (klitter::sample-rate sndfile) 48000)
          (= (klitter::channels sndfile) 2)))))
+
+;;; test make-sndfile
+;;; RP  Sat Jul 15 19:39:29 2023
+(test test-make-sndfile
+  (let* ((path (test-pathname "snd/kalimba.wav"))
+         (sndfile (klitter::make-sndfile path
+                                         :id "kalimba"
+                                         :start 2.0
+                                         :duration 5.0)))
+    (is (and
+         (= (klitter::start sndfile) 2.0)
+         (equal "kalimba" (klitter::id sndfile))
+         (= (klitter::end sndfile) 7.0)
+         (= (klitter::duration sndfile) 5.0)))))
 
 
 
