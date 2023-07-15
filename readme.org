@@ -1,0 +1,34 @@
+#+CATEGORY: concsyn
+#+title: klitter
+#+author: Ruben Philipp
+#+date: 2023-07-15
+#+startup: showall 
+
+/klitter/ is a Common Lisp implementation of concatenative synthesis processes.
+
+* Introduction
+
+- TODO
+
+
+* Project structure
+
+- ~/src~. Contains the source code of the project.
+- ~/doc~. Contains a documentation generated via [[https://github.com/gumpu/ROBODoc][ROBODoc]].
+- ~/tests~. Regression tests via [[https://github.com/lispci/fiveam][fiveam]].
+- ~/examples~. Usage examples. 
+
+
+* Requirements
+
+- [[https://asdf.common-lisp.dev][ASDF]]
+- [[https://github.com/csound/csound][Csound]]
+- [[https://vamp-plugins.org][Vamp Plugins]] for analyses / feature extraction and [[https://vamp-plugins.org/sonic-annotator/][Sonic Annotator]]
+
+
+Tested with /SBCL/.
+
+
+#+begin_comment
+$$ Last modified:  14:11:43 Sat Jul 15 2023 CEST
+#+end_comment
