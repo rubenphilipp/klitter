@@ -13,7 +13,7 @@
 ;;; Package definition for klitter.
 ;;;
 ;;;
-;;; $$ Last modified:  14:26:32 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  16:23:14 Sat Jul 15 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -21,10 +21,11 @@
 
 (defpackage :klitter
   (:use :common-lisp)
-  (:nicknames :cl-concsyn :kittler)
+  (:nicknames :kr :kittler)
   (:import-from
    :alexandria
-   :read-file-into-string)
+   :read-file-into-string
+   :assoc-value)
   (:import-from
    :parse-float
    :parse-float)

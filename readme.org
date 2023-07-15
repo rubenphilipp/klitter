@@ -21,6 +21,8 @@
 
 * Requirements
 
+- [[https://ccrma.stanford.edu/software/snd/snd/clm.html][Common Lisp Music (CLM)]]
+  - via /ASD/
 - [[https://asdf.common-lisp.dev][ASDF]]
 - [[https://github.com/csound/csound][Csound]]
 - [[https://vamp-plugins.org][Vamp Plugins]] for analyses / feature extraction and [[https://vamp-plugins.org/sonic-annotator/][Sonic Annotator]]
@@ -30,5 +32,5 @@ Tested with /SBCL/.
 
 
 #+begin_comment
-$$ Last modified:  14:11:43 Sat Jul 15 2023 CEST
+$$ Last modified:  15:06:00 Sat Jul 15 2023 CEST
 #+end_comment
