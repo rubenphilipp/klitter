@@ -47,7 +47,7 @@
  CLASS HIERARCHY
 
 
- $$ Last modified:  17:45:00 Sun Jul 16 2023 CEST
+ $$ Last modified:  18:56:54 Sun Jul 16 2023 CEST
 </pre>
 
 <hr />
@@ -178,9 +178,134 @@
 <pre class="source">(defun <strong>get-vamp-plugins</strong> ()
 </pre>
 
+<hr />
+<a name="vamp2fload2drdf2dfrom2dfile"></a>
+<a name="robo19"></a><h2>vamp/load-rdf-from-file [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Shortcut to load a stored RDF-file to a string. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The path to the RDF-file. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The string containing the RDF-data. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>load-rdf-from-file</strong>
+ (<a href="#robo21">save-rdf-to-file</a> (<a href="#robo17">get-vamp-plugin-skeleton</a> "<a href="#robo2">vamp</a>:azi:azi:plan")))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>load-rdf-from-file</strong> (path)
+</pre>
+
+<hr />
+<a name="vamp2frun2dvamp2dtransform"></a>
+<a name="robo20"></a><h2>vamp/run-vamp-transform [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Runs a <a href="#robo2">vamp</a> transform on a sound file and returns the analysis result
+ as a list of the form:
+ '((timestamp-1 valuea-1 valueb-1 ... valuen-1)
+   (timestamp-2 valuea-2 valueb-2 ... valuen-2)
+   ...
+   (timestamp-n valuea-n valueb-n ... valuen-n)
+ NB: The timestamp is in seconds. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A string containing the path to the sound file to be analysed.
+ - A string containing the path to the RDF-file used for the analysis.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :sa-command. The path to the sonic-annotator binary. Defaults to the
+   path defined in <a href="./globals_lisp.html#robo4">+kr-config-data+</a>.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A list of lists with the results of the analysis (see above). 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(let* ((rdf-data
+         (change-<a href="#robo2">vamp</a>-pars
+          '((:step-size 512) (:block-size 1024))
+          (<a href="#robo17">get-vamp-plugin-skeleton</a>
+           "<a href="#robo2">vamp</a>:<a href="#robo2">vamp</a>-example-plugins:amplitudefollower:amplitude")))
+       (<a href="./sndfile_lisp.html#robo9">sndfile</a> (<a href="./utilities_lisp.html#robo12">path-from-same-dir</a> "../examples/snd/kalimba.wav"))
+       (rdf-file "/tmp/amp.n3"))
+  ;; store RDF-file
+  (with-open-file (stream rdf-file
+                          :direction :output
+                          :if-does-not-exist :create
+                          :if-exists :supersede)
+    (format stream "~a" rdf-data))
+  ;; run the analysis
+  (<strong>run-vamp-transform</strong> <a href="./sndfile_lisp.html#robo9">sndfile</a> rdf-file))
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>run-vamp-transform</strong> (<a href="./sndfile_lisp.html#robo9">sndfile</a>-path rdffile-path
+                           &amp;key
+                             (sa-command (<a href="./globals_lisp.html#robo5">get-kr-config</a> :sa-command)))
+</pre>
+
+<hr />
+<a name="vamp2fsave2drdf2dto2dfile"></a>
+<a name="robo21"></a><h2>vamp/save-rdf-to-file [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> A shortcut so store an RDF-string to a file. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The RDF string (e.g. obtained via get-<a href="#robo2">vamp</a>-plugin-skeleton)
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :outfile. The output file path for the RDF/N3 file. Defaults to the
+   a path retrieved from the standard output directory and a generic
+   filename. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The path to the file stored.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>save-rdf-to-file</strong> (<a href="#robo17">get-vamp-plugin-skeleton</a> "<a href="#robo2">vamp</a>:azi:azi:plan"))
+;; =&gt; "/tmp/vamp426.n3"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>save-rdf-to-file</strong> (rdf &amp;key
+                             (outfile (concatenate
+                                       'string
+                                       (<a href="./globals_lisp.html#robo5">get-kr-config</a> :default-dir)
+                                       (format nil "~a"
+                                               (alexandria:symbolicate
+                                                (alexandria:make-gensym
+                                                 "<a href="#robo2">vamp</a>")))
+                                       ".n3")))
+</pre>
+
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 17:45:07</p>
+<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 18:57:02</p>
 </div> <!-- footer -->
 </body>
 </html>

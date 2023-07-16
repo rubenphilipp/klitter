@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  18:29:53 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  18:31:17 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

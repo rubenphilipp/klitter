@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  18:26:05 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  18:56:54 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -205,6 +205,81 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* vamp/save-rdf-to-file
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; A shortcut so store an RDF-string to a file. 
+;;;
+;;; ARGUMENTS
+;;; - The RDF string (e.g. obtained via get-vamp-plugin-skeleton)
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :outfile. The output file path for the RDF/N3 file. Defaults to the
+;;;   a path retrieved from the standard output directory and a generic
+;;;   filename. 
+;;; 
+;;; RETURN VALUE
+;;; The path to the file stored.
+;;;
+;;; EXAMPLE
+#|
+(save-rdf-to-file (get-vamp-plugin-skeleton "vamp:azi:azi:plan"))
+;; => "/tmp/vamp426.n3"
+|#
+;;; SYNOPSIS
+(defun save-rdf-to-file (rdf &key
+                             (outfile (concatenate
+                                       'string
+                                       (get-kr-config :default-dir)
+                                       (format nil "~a"
+                                               (alexandria:symbolicate
+                                                (alexandria:make-gensym
+                                                 "vamp")))
+                                       ".n3")))
+  ;;; ****
+  (with-open-file (stream outfile
+                          :direction :output
+                          :if-exists :supersede
+                          :if-does-not-exist :create)
+    (format stream rdf))
+  outfile)
+                                                   
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* vamp/load-rdf-from-file
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Shortcut to load a stored RDF-file to a string. 
+;;;
+;;; ARGUMENTS
+;;; The path to the RDF-file. 
+;;; 
+;;; RETURN VALUE
+;;; The string containing the RDF-data. 
+;;;
+;;; EXAMPLE
+#|
+(load-rdf-from-file
+ (save-rdf-to-file (get-vamp-plugin-skeleton "vamp:azi:azi:plan")))
+|#
+;;; SYNOPSIS
+(defun load-rdf-from-file (path)
+  ;;; ****
+  (read-file-into-string path))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* vamp/run-vamp-transform
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
@@ -273,6 +348,9 @@
                     ;;remove first row
                     (cdr
                      (cl-csv:read-csv result))))))
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
