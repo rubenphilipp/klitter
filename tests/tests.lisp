@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  17:43:54 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  18:29:53 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -112,6 +112,26 @@
                  (klitter::get-vamp-plugin-skeleton
                   "vamp:vamp-example-plugins:amplitudefollower:amplitude"))))
     (is (stringp result))))
+
+
+;;; test run-vamp-transform
+;;; RP  Sun Jul 16 18:20:51 2023
+(test test-run-vamp-transform
+  (let ((rdf-data
+          (klitter::change-vamp-pars
+           '((:step-size 512) (:block-size 1024))
+           (klitter::get-vamp-plugin-skeleton
+            "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
+        (sndfile (test-pathname "snd/kalimba.wav"))
+        (rdf-file "/tmp/amp.n3"))
+    ;; store RDF-file
+    (with-open-file (stream rdf-file
+                            :direction :output
+                            :if-does-not-exist :create
+                            :if-exists :supersede)
+      (format stream "~a" rdf-data))
+    (let ((result (klitter::run-vamp-transform sndfile rdf-file)))
+      (is (listp result)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

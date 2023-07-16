@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  17:45:00 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  18:26:05 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -180,18 +180,99 @@
                                 "\"")))
     (regex-replace search-regex transform-rdf new-value)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; shortcut in order to change multiple parameters
+;;; RP  Sun Jul 16 17:55:39 2023
+;;;
+;;; - parvals should be a list of lists consisting of parameter and value, e.g.
+;;;   '((:step-size 256) (:block-size 512))
+;;;
+;;; EXAMPLE
+#|
+(change-vamp-pars '((:step-size 256) (:block-size 1024))
+                   (get-vamp-plugin-skeleton "vamp:azi:azi:plan"))
+|#
+
+(defmacro change-vamp-pars (parvals rdf)
+  `(loop for pv in ,parvals
+         for param = (first pv)
+         for val = (second pv)
+         with result = ,rdf
+         do
+            (setf result (change-vamp-transform-parameter param val result))
+         finally
+            (return result)))
 
 
-
-(let* ((rdf (get-vamp-plugin-skeleton "vamp:azi:azi:plan"))
-       (hop-size 512)
-       (window-size 1024))
-  (cl-ppcre::regex-replace "vamp:step_size \\\"([0-9]+)\\\""
-                           rdf
-                           "bla"))
-
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* vamp/run-vamp-transform
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Runs a vamp transform on a sound file and returns the analysis result
+;;; as a list of the form:
+;;; '((timestamp-1 valuea-1 valueb-1 ... valuen-1)
+;;;   (timestamp-2 valuea-2 valueb-2 ... valuen-2)
+;;;   ...
+;;;   (timestamp-n valuea-n valueb-n ... valuen-n)
+;;; NB: The timestamp is in seconds. 
+;;;
+;;; ARGUMENTS
+;;; - A string containing the path to the sound file to be analysed.
+;;; - A string containing the path to the RDF-file used for the analysis.
+;;;
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :sa-command. The path to the sonic-annotator binary. Defaults to the
+;;;   path defined in +kr-config-data+.
+;;; 
+;;; RETURN VALUE
+;;; A list of lists with the results of the analysis (see above). 
+;;;
+;;; EXAMPLE
+#|
+(let* ((rdf-data
+         (change-vamp-pars
+          '((:step-size 512) (:block-size 1024))
+          (get-vamp-plugin-skeleton
+           "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
+       (sndfile (path-from-same-dir "../examples/snd/kalimba.wav"))
+       (rdf-file "/tmp/amp.n3"))
+  ;; store RDF-file
+  (with-open-file (stream rdf-file
+                          :direction :output
+                          :if-does-not-exist :create
+                          :if-exists :supersede)
+    (format stream "~a" rdf-data))
+  ;; run the analysis
+  (run-vamp-transform sndfile rdf-file))
+|#
+;;; SYNOPSIS
+(defun run-vamp-transform (sndfile-path rdffile-path
+                           &key
+                             (sa-command (get-kr-config :sa-command)))
+  ;;; ****
+  (let ((result (shell sa-command
+                       "-t"
+                       rdffile-path
+                       sndfile-path
+                       "-w"
+                       "csv"
+                       "--csv-stdout")))
+    ;; parse strings to float
+    (mapcar #'(lambda (x)
+                (loop for i in x
+                      collect
+                      (parse-float i)))
+            ;; remove first column
+            (mapcar #'cdr
+                    ;;remove first row
+                    (cdr
+                     (cl-csv:read-csv result))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
