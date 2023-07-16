@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  23:49:54 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  00:00:58 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,6 +57,18 @@
   (unless (slot-value dn 'data)
     (analyse dn)))
 
+
+(defmethod (setf hop-size) :after (value (dn description))
+  (declare (ignore value))
+  ;; perform analysis with new hop-size
+  (analyse dn))
+
+(defmethod (setf window-size) :after (value (dn description))
+  (declare (ignore value))
+  ;; perform analysis with new window-size
+  (analyse dn))
+
+
 (defmethod print-object :before ((dn description) stream)
   (format stream "~%DESCRIPTION: sndfile: ~a, descriptor: ~a, ~
                   hop-size: ~a, window-size: ~a"
@@ -83,8 +95,8 @@
 ;;; The updated description object. 
 ;;;
 ;;; EXAMPLE
-#|
-(let* ((descriptor (get-kr-standard-descriptor :spectral-centroid))
+
+(let* ((descriptor (get-kr-standard-descriptor :rms))
        (sndfile (make-sndfile (path-from-src-dir
                                "../examples/snd/kalimba.wav")))
        (hop 512)
@@ -94,8 +106,9 @@
                                    :hop-size hop
                                    :sndfile sndfile
                                    :descriptor descriptor)))
-  description)
-|#
+  ;;(setf (window-size description) 1024)
+  (data description))
+
 ;;; SYNOPSIS
 (defmethod analyse ((dn description))
   ;;; ****

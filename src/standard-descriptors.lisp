@@ -21,7 +21,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  23:02:43 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  00:00:43 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -188,7 +188,7 @@
        (descriptor-gensym (generic-symbol id))
        (rdf-file (path-from-src-dir "vamp/rms.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size nil))
+                                                 :ignore-window-size t))
        (descriptor (make-descriptor type descriptor-fun
                                     :description description
                                     :id id)))
@@ -222,7 +222,7 @@
        (descriptor-gensym (generic-symbol id))
        (rdf-file (path-from-src-dir "vamp/spectral-centroid.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size nil))
+                                                 :ignore-window-size t))
        (descriptor (make-descriptor type descriptor-fun
                                     :description description
                                     :id id)))
@@ -256,7 +256,7 @@
        (descriptor-gensym (generic-symbol id))
        (rdf-file (path-from-src-dir "vamp/spectral-rolloff.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size nil))
+                                                 :ignore-window-size t))
        (descriptor (make-descriptor type descriptor-fun
                                     :description description
                                     :id id)))
@@ -289,7 +289,7 @@
        (descriptor-gensym (generic-symbol id))
        (rdf-file (path-from-src-dir "vamp/inharmonicity.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size nil))
+                                                 :ignore-window-size t))
        (descriptor (make-descriptor type descriptor-fun
                                     :description description
                                     :id id)))
@@ -321,7 +321,7 @@
        (descriptor-gensym (generic-symbol id))
        (rdf-file (path-from-src-dir "vamp/f0.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size nil))
+                                                 :ignore-window-size t))
        (descriptor (make-descriptor type descriptor-fun
                                     :description description
                                     :id id)))
