@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  19:44:16 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  20:04:01 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -440,7 +440,7 @@
 ;;; objects) from a given RDF-file. 
 ;;;
 ;;; ARGUMENTS
-;;; - The function name of the descriptor function.
+;;; - The function name of the descriptor function. Must be a symbol.
 ;;; - The path to the RDF-file as a string. 
 ;;; 
 ;;; OPTIONAL ARGUMENTS
@@ -452,20 +452,23 @@
 ;;; The function name of the descriptor-fun. 
 ;;;
 ;;; EXAMPLE
-
-
+#|
+(make-vamp-descriptor-fun
+ (generic-symbol 'centroid)
+ (save-rdf-to-file
+  (get-vamp-plugin-skeleton
+   "vamp:vamp-example-plugins:spectralcentroid:linearcentroid"))
+ :ignore-window-size nil)
+;;=> CENTROID505
+|#
 ;;; SYNOPSIS
-;; (defmacro (fname rdf-file &key (ignore-window-size nil))
-;;   (append
-;;    `(defun ,name (sndfile hop-size window-size))
-;;    (when ignore-window-size
-;;      '(declare (ignore window-size)))
-   
-     
-
-
-
-
+(defmacro make-vamp-descriptor-fun (fname rdf-file
+                                    &key (ignore-window-size nil))
+  (let ((fname (eval fname))
+        (rdf-file (eval rdf-file)))
+  `(defun ,fname (sndfile hop-size window-size)
+     (do-vamp-description sndfile hop-size window-size
+       ,rdf-file :ignore-window-size ,ignore-window-size))))
 
 
 
