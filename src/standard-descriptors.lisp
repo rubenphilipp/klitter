@@ -21,7 +21,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  22:52:47 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  23:02:43 Sun Jul 16 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -130,7 +130,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/zero-crossings
+;;; ****v* standard-descriptors/:zero-crossings
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -141,7 +141,10 @@
 ;;; This returns the number of zero crossings, signifying:
 ;;; "General noisiness, existence of transients" [sturm2004]
 ;;;
-;;; SYNOPSIS
+;;; USAGE
+;;; (get-kr-standard-descriptor :zero-crossings)
+;;;
+
 (let* ((id 'zero-crossings)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
@@ -159,7 +162,7 @@
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/rms
+;;; ****v* standard-descriptors/:rms
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -173,7 +176,9 @@
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
 ;;;
-;;; SYNOPSIS
+;;; USAGE
+;;; (get-kr-standard-descriptor :rms)
+;;; 
 (let* ((id 'rms)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
@@ -191,7 +196,7 @@
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/spectral-centroid
+;;; ****v* standard-descriptors/:spectral-centroid
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -205,7 +210,9 @@
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
 ;;;
-;;; SYNPOSIS
+;;; USAGE
+;;; (get-kr-standard-descriptor :spectral-centroid)
+;;; 
 (let* ((id 'spectral-centroid)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
@@ -223,7 +230,7 @@
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/spectral-rolloff
+;;; ****v* standard-descriptors/:spectral-rolloff
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -236,8 +243,10 @@
 ;;;
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;
+;;; USAGE
+;;; (get-kr-standard-descriptor :spectral-rolloff)
 ;;; 
-;;; SYNPOSIS
 (let* ((id 'spectral-rolloff)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
@@ -255,7 +264,7 @@
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/inharmonicity
+;;; ****v* standard-descriptors/:inharmonicity
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -267,8 +276,10 @@
 ;;;
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;
+;;; USAGE
+;;; (get-kr-standard-descriptor :inharmonicity)
 ;;; 
-;;; SYNPOSIS
 (let* ((id 'inharmonicity)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
@@ -286,7 +297,7 @@
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****v* standard-descriptors/f0
+;;; ****v* standard-descriptors/:f0
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -299,7 +310,8 @@
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
 ;;; 
-;;; SYNPOSIS
+;;; USAGE
+;;; (get-kr-standard-descriptor :f0)
 (let* ((id 'f0)
        (rdf-skeleton
          (get-vamp-plugin-skeleton
