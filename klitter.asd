@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; System definition (ASDF) for klitter.
 ;;;
-;;; $$ Last modified:  15:08:06 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  15:09:28 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -32,6 +32,7 @@
   :pathname "src/"
   :components ((:file "package")
                (:file "globals")
+               (:file "named-object")
                (:file "utilities")
                (:file "sndfile")
                (:file "klitter")))
