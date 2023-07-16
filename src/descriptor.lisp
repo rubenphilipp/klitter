@@ -22,12 +22,15 @@
 ;;; CLASS HIERARCHY
 ;;; named-object->descriptor
 ;;;
-;;; $$ Last modified:  15:44:16 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  15:54:36 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
 
+
+
+#|
 (let ((plugins (shell (get-kr-config :sa-command) "--list")))
   (print (format nil "~a" plugins)))
 
@@ -41,7 +44,8 @@
                       :ignore-error-status t)
   (if (zerop exit-code)
       (format t "outout is: ~a" output)
-      (format t "error-output is: ~a" error-output)))
+(format t "error-output is: ~a" error-output)))
+|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF descriptor.lisp
