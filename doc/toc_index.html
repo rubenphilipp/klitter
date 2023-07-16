@@ -24,6 +24,7 @@
 <a class="menuitem" href="./robo_classes.html#top">Classes</a>
 <a class="menuitem" href="./robo_functions.html#top">Functions</a>
 <a class="menuitem" href="./robo_modules.html#top">Modules</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
 <a class="menuitem" href="./robo_variables.html#top">Variables</a>
 </div> <!-- navigation -->
 <div id="content">
@@ -32,42 +33,44 @@
 <li><a href="./globals_lisp.html#robo0">klitter/globals</a></li>
 <li><a href="./utilities_lisp.html#robo1">klitter/utilities</a></li>
 <li><a href="./vamp_lisp.html#robo2">kr/vamp</a></li>
-<li><a href="./descriptor_lisp.html#robo3">descriptor/make-descriptor</a></li>
-<li><a href="./globals_lisp.html#robo4">globals/+kr-config-data+</a></li>
-<li><a href="./globals_lisp.html#robo5">globals/get-kr-config</a></li>
-<li><a href="./globals_lisp.html#robo6">globals/set-kr-config</a></li>
-<li><a href="./named-object_lisp.html#robo7">klitter/named-object</a></li>
-<li><a href="./descriptor_lisp.html#robo8">named-object/descriptor</a></li>
-<li><a href="./sndfile_lisp.html#robo9">named-object/sndfile</a></li>
-<li><a href="./sndfile_lisp.html#robo10">sndfile/make-sndfile</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo11">standard-descriptors/+kr-standard-descriptors+</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo12">standard-descriptors/:f0</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo13">standard-descriptors/:inharmonicity</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo14">standard-descriptors/:rms</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo15">standard-descriptors/:spectral-centroid</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo16">standard-descriptors/:spectral-rolloff</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo17">standard-descriptors/:zero-crossings</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo18">standard-descriptors/get-kr-standard-descriptor</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo19">standard-descriptors/make-vamp-descriptor-fun</a></li>
-<li><a href="./standard-descriptors_lisp.html#robo20">standard-descriptors/set-kr-standard-descriptor</a></li>
-<li><a href="./utilities_lisp.html#robo21">utilities/generic-symbol</a></li>
-<li><a href="./utilities_lisp.html#robo22">utilities/mins-secs-to-secs</a></li>
-<li><a href="./utilities_lisp.html#robo23">utilities/path-from-same-dir</a></li>
-<li><a href="./utilities_lisp.html#robo24">utilities/path-from-src-dir</a></li>
-<li><a href="./utilities_lisp.html#robo25">utilities/shell</a></li>
-<li><a href="./utilities_lisp.html#robo26">utilities/simple-shell</a></li>
-<li><a href="./utilities_lisp.html#robo27">utilities/trailing-slash</a></li>
-<li><a href="./vamp_lisp.html#robo28">vamp/change-vamp-transform-parameter</a></li>
-<li><a href="./vamp_lisp.html#robo29">vamp/do-vamp-description</a></li>
-<li><a href="./vamp_lisp.html#robo30">vamp/get-vamp-plugin-skeleton</a></li>
-<li><a href="./vamp_lisp.html#robo31">vamp/get-vamp-plugins</a></li>
-<li><a href="./vamp_lisp.html#robo32">vamp/load-rdf-from-file</a></li>
-<li><a href="./vamp_lisp.html#robo33">vamp/run-vamp-transform</a></li>
-<li><a href="./vamp_lisp.html#robo34">vamp/save-rdf-to-file</a></li>
+<li><a href="./description_lisp.html#robo3">description/analyse</a></li>
+<li><a href="./descriptor_lisp.html#robo4">descriptor/make-descriptor</a></li>
+<li><a href="./globals_lisp.html#robo5">globals/+kr-config-data+</a></li>
+<li><a href="./globals_lisp.html#robo6">globals/get-kr-config</a></li>
+<li><a href="./globals_lisp.html#robo7">globals/set-kr-config</a></li>
+<li><a href="./named-object_lisp.html#robo8">klitter/named-object</a></li>
+<li><a href="./description_lisp.html#robo9">named-object/description</a></li>
+<li><a href="./descriptor_lisp.html#robo10">named-object/descriptor</a></li>
+<li><a href="./sndfile_lisp.html#robo11">named-object/sndfile</a></li>
+<li><a href="./sndfile_lisp.html#robo12">sndfile/make-sndfile</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo13">standard-descriptors/+kr-standard-descriptors+</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo14">standard-descriptors/:f0</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo15">standard-descriptors/:inharmonicity</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo16">standard-descriptors/:rms</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo17">standard-descriptors/:spectral-centroid</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo18">standard-descriptors/:spectral-rolloff</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo19">standard-descriptors/:zero-crossings</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo20">standard-descriptors/get-kr-standard-descriptor</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo21">standard-descriptors/make-vamp-descriptor-fun</a></li>
+<li><a href="./standard-descriptors_lisp.html#robo22">standard-descriptors/set-kr-standard-descriptor</a></li>
+<li><a href="./utilities_lisp.html#robo23">utilities/generic-symbol</a></li>
+<li><a href="./utilities_lisp.html#robo24">utilities/mins-secs-to-secs</a></li>
+<li><a href="./utilities_lisp.html#robo25">utilities/path-from-same-dir</a></li>
+<li><a href="./utilities_lisp.html#robo26">utilities/path-from-src-dir</a></li>
+<li><a href="./utilities_lisp.html#robo27">utilities/shell</a></li>
+<li><a href="./utilities_lisp.html#robo28">utilities/simple-shell</a></li>
+<li><a href="./utilities_lisp.html#robo29">utilities/trailing-slash</a></li>
+<li><a href="./vamp_lisp.html#robo30">vamp/change-vamp-transform-parameter</a></li>
+<li><a href="./vamp_lisp.html#robo31">vamp/do-vamp-description</a></li>
+<li><a href="./vamp_lisp.html#robo32">vamp/get-vamp-plugin-skeleton</a></li>
+<li><a href="./vamp_lisp.html#robo33">vamp/get-vamp-plugins</a></li>
+<li><a href="./vamp_lisp.html#robo34">vamp/load-rdf-from-file</a></li>
+<li><a href="./vamp_lisp.html#robo35">vamp/run-vamp-transform</a></li>
+<li><a href="./vamp_lisp.html#robo36">vamp/save-rdf-to-file</a></li>
 </ul>
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/ with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 23:02:45</p>
+<p>Generated from ./src/ with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 23:45:39</p>
 </div> <!-- footer -->
 </body>
 </html>
