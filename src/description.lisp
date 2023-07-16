@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  23:41:49 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  23:49:54 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -56,6 +56,11 @@
   just perform analysis when data is not already set
   (unless (slot-value dn 'data)
     (analyse dn)))
+
+(defmethod print-object :before ((dn description) stream)
+  (format stream "~%DESCRIPTION: sndfile: ~a, descriptor: ~a, ~
+                  hop-size: ~a, window-size: ~a"
+          (sndfile dn) (descriptor dn) (hop-size dn) (window-size dn)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
