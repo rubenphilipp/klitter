@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  00:00:58 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  00:03:08 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -95,7 +95,7 @@
 ;;; The updated description object. 
 ;;;
 ;;; EXAMPLE
-
+#|
 (let* ((descriptor (get-kr-standard-descriptor :rms))
        (sndfile (make-sndfile (path-from-src-dir
                                "../examples/snd/kalimba.wav")))
@@ -106,9 +106,8 @@
                                    :hop-size hop
                                    :sndfile sndfile
                                    :descriptor descriptor)))
-  ;;(setf (window-size description) 1024)
   (data description))
-
+|#
 ;;; SYNOPSIS
 (defmethod analyse ((dn description))
   ;;; ****
