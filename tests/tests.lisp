@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  15:53:48 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  16:27:41 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -83,6 +83,12 @@
 (test test-shell
   (let* ((result (klitter::shell "pwd")))
     (is (stringp result))))
+
+
+;;; test make-descriptor
+(test test-make-descriptor
+  (let ((descr (klitter::make-descriptor :text #'(lambda (x y z) "nothing"))))
+    (is (typep descr 'klitter::descriptor))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

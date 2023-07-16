@@ -21,7 +21,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> descriptor
 ;;;
-;;; $$ Last modified:  16:16:22 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  16:28:27 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -44,7 +44,61 @@
               (eq (slot-value dr 'type) :text))
     (error "descriptor::initialize-instance: The descriptor type should be ~
             either :number or :text, not ~a"
-           (slot-value dr 'type))))
+           (slot-value dr 'type)))
+  ;;set data to descriptor-type
+  (setf (slot-value dr 'data) (slot-value dr 'type)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* descriptor/make-descriptor
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Helper function to create a descriptor object.
+;;;
+;;; ARGUMENTS
+;;; - The type of the descriptor. Either :number or :text.
+;;; - The descriptor-fun. This function must take three arguments:
+;;;   - a sndfile-object to analyse/described
+;;;   - the hop-size of the analysis (in samples)
+;;;   - the window-sizw of the analysis (in samples)
+;;;   and must return a list of lists of the form:
+;;;   '((timestamp-1 value-1)
+;;;     (timestamp-2 value-2)
+;;;     ...
+;;;     (timestamp-n value-n))
+;;;   The timestamp is in seconds, the value corresponds to the type of the
+;;;   descriptor, thus could be either a number (e.g. a float) or a string
+;;;   (e.g. "metallic").
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :description. An optional description of the descriptor. Must be a
+;;;   string.
+;;; - :id. The id of the descriptor.
+;;; 
+;;; RETURN VALUE
+;;; The descriptor object. 
+;;;
+;;; SYNOPSIS
+(defun make-descriptor (type descriptor-fun
+                        &key (description "")
+                          id)
+  ;;; ****
+  ;; sanity checks
+  (unless (functionp descriptor-fun)
+    (error "descriptor::make-descriptor: The descriptor-fun must be a ~
+            function, not a ~a" (type-of descriptor-fun)))
+  (make-instance 'descriptor
+                 :type type
+                 :descriptor-fun descriptor-fun
+                 :id id
+                 :description description))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
