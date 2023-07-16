@@ -15,14 +15,14 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  22:39:15 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:48:28 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****P* globals/+kr-config-data+
+;;; ****v* globals/+kr-config-data+
 ;;; NAME
 ;;; +kr-config-data+
 ;;; 

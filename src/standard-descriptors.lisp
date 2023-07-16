@@ -21,13 +21,13 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  22:44:14 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:48:19 Sun Jul 16 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****P* standard-descriptors/+kr-standard-descriptors+
+;;; ****v* standard-descriptors/+kr-standard-descriptors+
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -130,7 +130,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/zero-crossings
+;;; ****h* standard-descriptors/zero-crossings
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -158,7 +158,7 @@
   (set-kr-standard-descriptor :zero-crossings descriptor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/rms
+;;; ****h* standard-descriptors/rms
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -189,7 +189,7 @@
   (set-kr-standard-descriptor :rms descriptor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/spectral-centroid
+;;; ****h* standard-descriptors/spectral-centroid
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -220,7 +220,7 @@
   (set-kr-standard-descriptor :spectral-centroid descriptor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/spectral-rolloff
+;;; ****h* standard-descriptors/spectral-rolloff
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -251,7 +251,7 @@
   (set-kr-standard-descriptor :spectral-rolloff descriptor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/inharmonicity
+;;; ****h* standard-descriptors/inharmonicity
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -282,7 +282,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** standard-descriptors/f0
+;;; ****h* standard-descriptors/f0
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
@@ -319,11 +319,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; TESTS:
+#|
 (let* ((drf (descriptor-fun
-             (get-kr-standard-descriptor :spectral-centroid)))
+             (get-kr-standard-descriptor :spectral-rolloff)))
        (sndfile (make-sndfile
                  "/Users/rubenphilipp/code/klitter/examples/snd/kalimba.wav")))
-  (funcall drf sndfile 512 1024))
+(funcall drf sndfile 512 1024))
+|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF standard-descriptors.lisp
