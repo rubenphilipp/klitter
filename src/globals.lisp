@@ -36,7 +36,7 @@
 ;;; A global holding information about the configuration of klitter (e.g.
 ;;; paths to executables, output file preferences etc.).
 ;;; 
-;;; $$ Last modified:  16:31:46 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  19:23:03 Sun Jul 16 2023 CEST
 ;;; 
 (defparameter +kr-config-data+
   ;; The full path to the Csound command. This is required in order to
@@ -46,7 +46,9 @@
     ;; analyses done with VAMP-plugins.
     (:sa-command . "/opt/local/bin/sonic-annotator")
     ;; The default directory for file output.
-    (:default-dir . "/tmp/")))
+    (:default-dir . "/tmp/")
+    ;; the directory for temp files.
+    (:temp-dir . "/tmp/")))
   ;;; ****
 
 

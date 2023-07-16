@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  18:31:17 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  19:44:42 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -108,7 +108,7 @@
 ;;; RP  Sun Jul 16 17:42:16 2023
 (test test-change-vamp-transform-parameter
   (let ((result (klitter::change-vamp-transform-parameter
-                 :block-size 256
+                 :window-size 256
                  (klitter::get-vamp-plugin-skeleton
                   "vamp:vamp-example-plugins:amplitudefollower:amplitude"))))
     (is (stringp result))))
@@ -119,7 +119,7 @@
 (test test-run-vamp-transform
   (let ((rdf-data
           (klitter::change-vamp-pars
-           '((:step-size 512) (:block-size 1024))
+           '((:window-size 512) (:window-size 1024))
            (klitter::get-vamp-plugin-skeleton
             "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
         (sndfile (test-pathname "snd/kalimba.wav"))
@@ -131,6 +131,27 @@
                             :if-exists :supersede)
       (format stream "~a" rdf-data))
     (let ((result (klitter::run-vamp-transform sndfile rdf-file)))
+      (is (listp result)))))
+
+;;; test do-vamp-description
+;;; RP  Sun Jul 16 19:41:55 2023
+(test test-do-vamp-description
+  (let ((rdf-data
+          (klitter::change-vamp-pars
+           '((:window-size 512) (:window-size 1024))
+           (klitter::get-vamp-plugin-skeleton
+            "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
+        (sndfile (test-pathname "snd/kalimba.wav"))
+        (rdf-file "/tmp/amp.n3"))
+    ;; store RDF-file
+    (with-open-file (stream rdf-file
+                            :direction :output
+                            :if-does-not-exist :create
+                            :if-exists :supersede)
+      (format stream "~a" rdf-data))
+    (let ((result (klitter::do-vamp-description
+                      (klitter::make-sndfile sndfile)
+                    256 1024 rdf-file :ignore-window-size nil)))
       (is (listp result)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

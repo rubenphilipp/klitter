@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  15:53:09 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  19:07:53 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -207,6 +207,37 @@
       (error "utilities::shell: The call to ~a failed. Error output: ~a ~%"
              command error-output))
     output))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/generic-symbol
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This function creates a generic symbol from a given string and interns
+;;; it as a symbol into the package. 
+;;;
+;;; ARGUMENTS
+;;; A symbol to generify. 
+;;; 
+;;; RETURN VALUE
+;;; The generic symbol. 
+;;;
+;;; EXAMPLE
+#|
+(generic-symbol 'test)
+;; => TEST458
+|#
+;;; SYNOPSIS
+(defun generic-symbol (name)
+  ;;; ****
+  (alexandria:symbolicate
+   (alexandria:make-gensym name)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

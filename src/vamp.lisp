@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  18:56:54 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  19:44:16 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -121,8 +121,8 @@
 ;;;
 ;;; ARGUMENTS
 ;;; - The parameter to change. The following options are available:
-;;;   - :block-size (adjusts the numerical value of "vamp:block_size")
-;;;   - :step-size (adjusts the numerical value of "vamp:step_size")
+;;;   - :window-size (adjusts the numerical value of "vamp:block_size")
+;;;   - :hop-size (adjusts the numerical value of "vamp:step_size")
 ;;; - The new value. Either a number or a string. Must be a valid value and
 ;;;   type according to the specs of the VAMP transform (cf. sonic-annotator
 ;;;   doc).
@@ -134,7 +134,7 @@
 ;;;
 ;;; EXAMPLE
 #|
-(change-vamp-transform-parameter :block-size
+(change-vamp-transform-parameter :window-size
                                  512
                                  (get-vamp-plugin-skeleton "vamp:azi:azi:plan"))
 ;; =>
@@ -161,8 +161,8 @@
 (defun change-vamp-transform-parameter (parameter value transform-rdf)
    ;;; ****
   (case parameter
-    (:block-size (setf parameter "vamp:block_size"))
-    (:step-size (setf parameter "vamp:step_size"))
+    (:window-size (setf parameter "vamp:block_size"))
+    (:hop-size (setf parameter "vamp:step_size"))
     (t (error "vamp::change-vamp-transform-parameter: The parameter ~a is ~
                 not supported." parameter)))
   (unless (stringp transform-rdf)
@@ -185,11 +185,11 @@
 ;;; RP  Sun Jul 16 17:55:39 2023
 ;;;
 ;;; - parvals should be a list of lists consisting of parameter and value, e.g.
-;;;   '((:step-size 256) (:block-size 512))
+;;;   '((:hop-size 256) (:window-size 512))
 ;;;
 ;;; EXAMPLE
 #|
-(change-vamp-pars '((:step-size 256) (:block-size 1024))
+(change-vamp-pars '((:hop-size 256) (:window-size 1024))
                    (get-vamp-plugin-skeleton "vamp:azi:azi:plan"))
 |#
 
@@ -312,7 +312,7 @@
 #|
 (let* ((rdf-data
          (change-vamp-pars
-          '((:step-size 512) (:block-size 1024))
+          '((:hop-size 512) (:window-size 1024))
           (get-vamp-plugin-skeleton
            "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
        (sndfile (path-from-same-dir "../examples/snd/kalimba.wav"))
@@ -348,6 +348,122 @@
                     ;;remove first row
                     (cdr
                      (cl-csv:read-csv result))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* vamp/do-vamp-description
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This function is a helper function for all descriptor-funs. It changes
+;;; the parameters of the analysis (i.e. window and hop size) according
+;;; to the desired parameters in the analysis and stores a copy of the
+;;; original RDF-file to a temporary location.
+;;;
+;;; ARGUMENTS
+;;; - A sndfile-object.
+;;; - A number indicating the hop-size (in samples) for the analysis.
+;;; - A number indicating the window-size (in samples) for the analysis.
+;;; - A string containing the path to a RDF-file (cf. save-rdf-to-file).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :ignore-window-size. Then T, the window size won't be changed for the
+;;;   analysis. Default = NIL.
+;;; - :temp-dir. The directory for temp-files. Defaults to the setting in
+;;;   globals. 
+;;; 
+;;; RETURN VALUE
+;;; A list of analysis values (cf. run-vamp-transform).
+;;;
+;;; EXAMPLE
+#|
+(let* ((rdf-data
+         (change-vamp-pars
+          '((:hop-size 512) (:window-size 1024))
+          (get-vamp-plugin-skeleton
+           "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
+       (sndfile (path-from-same-dir "../examples/snd/kalimba.wav"))
+       (rdf-file "/tmp/amp.n3"))
+  ;; store RDF-file
+  (with-open-file (stream rdf-file
+                          :direction :output
+                          :if-does-not-exist :create
+                          :if-exists :supersede)
+    (format stream "~a" rdf-data))
+  ;; run the analysis
+  (do-vamp-description
+      (make-sndfile sndfile)
+    256 1024 rdf-file :ignore-window-size nil))
+|#
+;;; SYNOPSIS
+(defun do-vamp-description (sndfile hop-size window-size rdf-file
+                            &key
+                              (ignore-window-size nil)
+                              (temp-dir (get-kr-config :temp-dir)))
+  ;;; ****
+  ;; sanity checks
+  (unless (typep sndfile 'sndfile)
+    (error "vamp::do-vamp-description: The argument given as a sndfile ~
+            is not a sndfile object, but a ~a" (type-of sndfile)))
+  (let ((temp-rdf-file (concatenate 'string
+                                    temp-dir
+                                    "kr-vamp-"
+                                    (cl-fad::generate-random-string)
+                                    ".n3"))
+        (rdf-data (load-rdf-from-file rdf-file))
+        (analysis-pars (if ignore-window-size
+                           `((:hop-size ,hop-size))
+                           `((:hop-size ,hop-size)
+                             (:window-size ,window-size)))))
+    ;; change transform RDF according to analysis
+    (save-rdf-to-file (change-vamp-pars analysis-pars rdf-data)
+                      :outfile temp-rdf-file)
+    (prog1
+        (run-vamp-transform (path sndfile) temp-rdf-file)
+      (delete-file temp-rdf-file))))
+    
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** vamp/make-vamp-descriptor-fun
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This macro generates a descriptor function (to be used in descriptor
+;;; objects) from a given RDF-file. 
+;;;
+;;; ARGUMENTS
+;;; - The function name of the descriptor function.
+;;; - The path to the RDF-file as a string. 
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :ignore-window-size. Then T, the function will ignore changes in the
+;;;   window size during analysis. Default = NIL.
+;;; 
+;;; RETURN VALUE
+;;; The function name of the descriptor-fun. 
+;;;
+;;; EXAMPLE
+
+
+;;; SYNOPSIS
+;; (defmacro (fname rdf-file &key (ignore-window-size nil))
+;;   (append
+;;    `(defun ,name (sndfile hop-size window-size))
+;;    (when ignore-window-size
+;;      '(declare (ignore window-size)))
+   
+     
+
+
 
 
 
