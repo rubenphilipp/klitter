@@ -13,7 +13,7 @@
 ;;; Package definition for klitter.
 ;;;
 ;;;
-;;; $$ Last modified:  16:31:19 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  17:29:31 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -31,6 +31,7 @@
    :parse-float)
   (:import-from
    :cl-ppcre
+   :regex-replace
    :split))
 
 

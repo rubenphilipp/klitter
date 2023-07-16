@@ -47,12 +47,69 @@
  CLASS HIERARCHY
 
 
- $$ Last modified:  17:16:52 Sun Jul 16 2023 CEST
+ $$ Last modified:  17:45:00 Sun Jul 16 2023 CEST
+</pre>
+
+<hr />
+<a name="vamp2fchange2dvamp2dtransform2dparameter"></a>
+<a name="robo16"></a><h2>vamp/change-vamp-transform-parameter [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Replace the value of a VAMP transform plugin RDF file parameter with another
+ value. This is useful, e.g. in order to adjust the step or window size
+ according to the desired analysis options. 
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The parameter to change. The following options are available:
+   - :block-size (adjusts the numerical value of "<a href="#robo2">vamp</a>:block_size")
+   - :step-size (adjusts the numerical value of "<a href="#robo2">vamp</a>:step_size")
+ - The new value. Either a number or a string. Must be a valid value and
+   type according to the specs of the VAMP transform (cf. sonic-annotator
+   doc).
+ - A string containing the full RDF transform description (e.g. retrieved
+   via get-<a href="#robo2">vamp</a>-plugin-skeleton).
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The changed RDF transform description string. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>change-vamp-transform-parameter</strong> :block-size
+                                 512
+                                 (<a href="#robo17">get-vamp-plugin-skeleton</a> "<a href="#robo2">vamp</a>:azi:azi:plan"))
+;; =&gt;
+;; "@prefix xsd:      &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+;; @prefix <a href="#robo2">vamp</a>:     &lt;http://purl.org/ontology/<a href="#robo2">vamp</a>/&gt; .
+;; @prefix :         &lt;#&gt; .
+
+;; :transform_plugin a <a href="#robo2">vamp</a>:Plugin ;
+;;     <a href="#robo2">vamp</a>:identifier \"azi\" .
+
+;; :transform_library a <a href="#robo2">vamp</a>:PluginLibrary ;
+;;     <a href="#robo2">vamp</a>:identifier \"azi\" ;
+;;     <a href="#robo2">vamp</a>:available_plugin :transform_plugin .
+
+;; :transform a <a href="#robo2">vamp</a>:Transform ;
+;;     <a href="#robo2">vamp</a>:plugin :transform_plugin ;
+;;     <a href="#robo2">vamp</a>:step_size \"256\"^^xsd:int ; 
+;;     <a href="#robo2">vamp</a>:block_size \"512\"^^xsd:int ; 
+;;     <a href="#robo2">vamp</a>:plugin_version \"\"\"1\"\"\" ; 
+;;     <a href="#robo2">vamp</a>:output [ <a href="#robo2">vamp</a>:identifier \"plan\" ] .
+;; "
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>change-vamp-transform-parameter</strong> (parameter value transform-rdf)
 </pre>
 
 <hr />
 <a name="vamp2fget2dvamp2dplugin2dskeleton"></a>
-<a name="robo16"></a><h2>vamp/get-vamp-plugin-skeleton [ Functions ]</h2>
+<a name="robo17"></a><h2>vamp/get-vamp-plugin-skeleton [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -90,7 +147,7 @@
 
 <hr />
 <a name="vamp2fget2dvamp2dplugins"></a>
-<a name="robo17"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
+<a name="robo18"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -123,7 +180,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 17:18:26</p>
+<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 17:45:07</p>
 </div> <!-- footer -->
 </body>
 </html>
