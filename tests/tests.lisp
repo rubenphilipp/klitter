@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  19:44:42 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  21:38:03 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -153,6 +153,15 @@
                       (klitter::make-sndfile sndfile)
                     256 1024 rdf-file :ignore-window-size nil)))
       (is (listp result)))))
+
+;;; test standard-descriptor-zc
+;;; RP  Sun Jul 16 21:36:15 2023
+(test test-standard-descriptor-zc
+  (let* ((drf (klitter::descriptor-fun
+               (klitter::get-kr-standard-descriptor :zero-crossings)))
+         (sndfile (klitter::make-sndfile (test-pathname "snd/kalimba.wav")))
+         (result (funcall drf sndfile 512 1024)))
+    (is (listp result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

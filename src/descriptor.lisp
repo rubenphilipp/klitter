@@ -21,7 +21,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> descriptor
 ;;;
-;;; $$ Last modified:  17:18:20 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  21:33:28 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -47,6 +47,12 @@
            (slot-value dr 'type)))
   ;;set data to descriptor-type
   (setf (slot-value dr 'data) (slot-value dr 'type)))
+
+
+(defmethod print-object :before ((dr descriptor) stream)
+  (format stream "~%DESCRIPTOR: type: ~a, descriptor-fun: ~a, ~
+                  description: ~a"
+          (type dr) (descriptor-fun dr) (description dr)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
