@@ -14,14 +14,14 @@
 ;;; informations on descriptor types and links to a descriptor function
 ;;; which should take three arguments (a sndfile-object, the hop- and
 ;;; window-size of the analysis) and is supposed to return a list of lists
-;;; formatted as follows: '((timestamp value))
+;;; formatted as described in make-descriptor.
 ;;; The timestamp is in seconds, the value depends on the descriptor-type
 ;;; (could be either :text or :number).
 ;;;
 ;;; CLASS HIERARCHY
 ;;; named-object -> descriptor
 ;;;
-;;; $$ Last modified:  16:28:27 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  17:18:20 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -65,12 +65,12 @@
 ;;; - The descriptor-fun. This function must take three arguments:
 ;;;   - a sndfile-object to analyse/described
 ;;;   - the hop-size of the analysis (in samples)
-;;;   - the window-sizw of the analysis (in samples)
+;;;   - the window-size of the analysis (in samples)
 ;;;   and must return a list of lists of the form:
-;;;   '((timestamp-1 value-1)
-;;;     (timestamp-2 value-2)
+;;;   '((timestamp-1 valuea-1 valueb-1 ... valuen-1)
+;;;     (timestamp-2 valuea-2 valueb-2 ... valuen-2)
 ;;;     ...
-;;;     (timestamp-n value-n))
+;;;     (timestamp-n valuea-n valueb-n ... valuen-n)
 ;;;   The timestamp is in seconds, the value corresponds to the type of the
 ;;;   descriptor, thus could be either a number (e.g. a float) or a string
 ;;;   (e.g. "metallic").

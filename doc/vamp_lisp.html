@@ -47,12 +47,50 @@
  CLASS HIERARCHY
 
 
- $$ Last modified:  16:38:55 Sun Jul 16 2023 CEST
+ $$ Last modified:  17:16:52 Sun Jul 16 2023 CEST
+</pre>
+
+<hr />
+<a name="vamp2fget2dvamp2dplugin2dskeleton"></a>
+<a name="robo16"></a><h2>vamp/get-vamp-plugin-skeleton [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Returns the skeleton of the RDF-file for a given VAMP transform which is
+ required for analysing a <a href="./sndfile_lisp.html#robo9">sndfile</a>.
+ Cf. <a href="https://code.soundsoftware.ac.uk/projects/sonic-annotator/wiki\\">https://code.soundsoftware.ac.uk/projects/sonic-annotator/wiki\\</a>
+ #2-What-features-to-extract
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The transform id (e.g. retrieved via get-<a href="#robo2">vamp</a>-plugins). Must be a string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> A string with the sekelton of the VAMP transform's RDF file. 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>get-vamp-plugin-skeleton</strong> "<a href="#robo2">vamp</a>:azi:azi:plan")
+;; =&gt;
+;; "@prefix xsd:      &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+;; @prefix <a href="#robo2">vamp</a>:     &lt;http://purl.org/ontology/<a href="#robo2">vamp</a>/&gt; .
+;; @prefix :         &lt;#&gt; .
+
+;; :transform_plugin a <a href="#robo2">vamp</a>:Plugin ;
+;;     <a href="#robo2">vamp</a>:identifier \"azi\" .
+;; [...]
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>get-vamp-plugin-skeleton</strong> (transform-id)
 </pre>
 
 <hr />
 <a name="vamp2fget2dvamp2dplugins"></a>
-<a name="robo16"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
+<a name="robo17"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -85,7 +123,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 16:39:59</p>
+<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 17:18:26</p>
 </div> <!-- footer -->
 </body>
 </html>

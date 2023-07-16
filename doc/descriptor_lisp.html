@@ -44,12 +44,12 @@
  - The <a href="#robo8">descriptor</a>-fun. This function must take three arguments:
    - a <a href="./sndfile_lisp.html#robo9">sndfile</a>-object to analyse/described
    - the hop-size of the analysis (in samples)
-   - the window-sizw of the analysis (in samples)
+   - the window-size of the analysis (in samples)
    and must return a list of lists of the form:
-   '((timestamp-1 value-1)
-     (timestamp-2 value-2)
+   '((timestamp-1 valuea-1 valueb-1 ... valuen-1)
+     (timestamp-2 valuea-2 valueb-2 ... valuen-2)
      ...
-     (timestamp-n value-n))
+     (timestamp-n valuea-n valueb-n ... valuen-n)
    The timestamp is in seconds, the value corresponds to the type of the
    <a href="#robo8">descriptor</a>, thus could be either a number (e.g. a float) or a string
    (e.g. "metallic").
@@ -88,19 +88,19 @@
  informations on <strong>descriptor</strong> types and links to a <strong>descriptor</strong> function
  which should take three arguments (a <a href="./sndfile_lisp.html#robo9">sndfile</a>-object, the hop- and
  window-size of the analysis) and is supposed to return a list of lists
- formatted as follows: '((timestamp value))
+ formatted as described in <a href="#robo3">make-descriptor</a>.
  The timestamp is in seconds, the value depends on the <strong>descriptor</strong>-type
  (could be either :text or :number).
 
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo7">named-object</a> -&gt; <strong>descriptor</strong>
 
- $$ Last modified:  16:28:27 Sun Jul 16 2023 CEST
+ $$ Last modified:  17:18:20 Sun Jul 16 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 16:39:59</p>
+<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 17:18:26</p>
 </div> <!-- footer -->
 </body>
 </html>
