@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  20:50:34 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:02:46 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -425,50 +425,6 @@
     (prog1
         (run-vamp-transform (path sndfile) temp-rdf-file)
       (delete-file temp-rdf-file))))
-    
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ****** vamp/make-vamp-descriptor-fun
-;;; AUTHOR
-;;; Ruben Philipp <me@rubenphilipp.com>
-;;;
-;;; CREATED
-;;; 2023-07-16
-;;; 
-;;; DESCRIPTION
-;;; This macro generates a descriptor function (to be used in descriptor
-;;; objects) from a given RDF-file. 
-;;;
-;;; ARGUMENTS
-;;; - The function name of the descriptor function. Must be a symbol.
-;;; - The path to the RDF-file as a string. 
-;;; 
-;;; OPTIONAL ARGUMENTS
-;;; keyword-arguments:
-;;; - :ignore-window-size. Then T, the function will ignore changes in the
-;;;   window size during analysis. Default = NIL.
-;;; 
-;;; RETURN VALUE
-;;; The function name of the descriptor-fun. 
-;;;
-;;; EXAMPLE
-#|
-(make-vamp-descriptor-fun
- (generic-symbol 'centroid)
- (save-rdf-to-file
-  (get-vamp-plugin-skeleton
-   "vamp:vamp-example-plugins:spectralcentroid:linearcentroid"))
- :ignore-window-size nil)
-;;=> CENTROID505
-|#
-;;; SYNOPSIS
-(defmacro make-vamp-descriptor-fun (fname rdf-file
-                                    &key (ignore-window-size nil))
-  (let ((fname (eval fname))
-        (rdf-file (eval rdf-file)))
-  `(defun ,fname (sndfile hop-size window-size)
-     (do-vamp-description sndfile hop-size window-size
-       ,rdf-file :ignore-window-size ,ignore-window-size))))
 
 
 

@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  19:07:53 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:41:06 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,6 +57,8 @@
 ;;; This function returns the full path to a file reilative to the directory of
 ;;; the current lisp file.
 ;;; NB: This function is borrowed from Michael Edwards's slippery-chicken.
+;;; NB2: This function does not work with files which have been loaded via
+;;;      ASDF/quicklisp.
 ;;;
 ;;; ARGUMENTS
 ;;; - A string indicating the filename (or pathname) to the file relative to
@@ -66,13 +68,42 @@
 ;;; A string with the full path to the file.
 ;;; 
 ;;; SYNOPSIS
- (defun path-from-same-dir (file)
+(defun path-from-same-dir (file)
    ;;; ****
   (concatenate 'string
                (trailing-slash
                 (directory-namestring (truename *load-pathname*)))
                file))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/path-from-src-dir
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This function returns a path from the src dir. It is intended to be used
+;;; within the main lisp files.
+;;; NB: This function requires ASDF. 
+;;;
+;;; ARGUMENTS
+;;; - A string indicating the filename (or pathname) to the file relative to
+;;;   the src directory file.
+;;; 
+;;; RETURN VALUE
+;;; A string with the full path to the file.
+;;; 
+;;; SYNOPSIS
+(defun path-from-src-dir (file)
+   ;;; ****
+  (namestring (asdf::SYSTEM-RELATIVE-PATHNAME
+               :klitter
+               (concatenate 'string
+                            "src/"
+                            file))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* utilities/mins-secs-to-secs

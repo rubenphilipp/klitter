@@ -21,7 +21,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  21:38:20 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:40:24 Sun Jul 16 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -78,6 +78,11 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* standard-descriptors/make-vamp-descriptor-fun
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
@@ -116,7 +121,14 @@
   (lambda (sndfile hop-size window-size)
     (do-vamp-description sndfile hop-size window-size
       rdf-file :ignore-window-size ignore-window-size)))
- 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****** standard-descriptors/zero-crossings
 ;;; AUTHOR
@@ -137,14 +149,7 @@
        (description "Detects and counts zero crossing points")
        (type :number)
        (descriptor-gensym (generic-symbol id))
-       (rdf-file (save-rdf-to-file rdf-skeleton
-                                   :outfile
-                                   (concatenate
-                                    'string
-                                    (get-kr-config :default-dir)
-                                    (format nil "~a"
-                                            descriptor-gensym)
-                                    ".n3")))
+       (rdf-file (path-from-src-dir "vamp/zero-crossings.n3"))
        (descriptor-fun (make-vamp-descriptor-fun rdf-file
                                                  :ignore-window-size nil))
        (descriptor (make-descriptor type descriptor-fun
@@ -152,7 +157,173 @@
                                     :id id)))
   (set-kr-standard-descriptor :zero-crossings descriptor))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** standard-descriptors/rms
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This returns the root mean square (RMS), signifying:
+;;; "Mean acoustic energy (loudness)" [sturm2004]
+;;;
+;;; NB: Requires LibXtract Vamp plugins
+;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(let* ((id 'rms)
+       (rdf-skeleton
+         (get-vamp-plugin-skeleton
+          "vamp:vamp-libxtract:rms_amplitude:rms_amplitude"))
+       (description "Extract the RMS amplitude of an audio signal.")
+       (type :number)
+       (descriptor-gensym (generic-symbol id))
+       (rdf-file (path-from-src-dir "vamp/rms.n3"))
+       (descriptor-fun (make-vamp-descriptor-fun rdf-file
+                                                 :ignore-window-size nil))
+       (descriptor (make-descriptor type descriptor-fun
+                                    :description description
+                                    :id id)))
+  (set-kr-standard-descriptor :rms descriptor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** standard-descriptors/spectral-centroid
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This returns the spectral centroid, signifying:
+;;; "Mean frequency of total spectral energy distribution" [sturm2004]
+;;;
+;;; NB: Requires LibXtract Vamp plugins
+;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(let* ((id 'spectral-centroid)
+       (rdf-skeleton
+         (get-vamp-plugin-skeleton
+          "vamp:vamp-libxtract:spectral_centroid:spectral_centroid"))
+       (description "Extract the spectral centroid of an audio spectrum.")
+       (type :number)
+       (descriptor-gensym (generic-symbol id))
+       (rdf-file (path-from-src-dir "vamp/spectral-centroid.n3"))
+       (descriptor-fun (make-vamp-descriptor-fun rdf-file
+                                                 :ignore-window-size nil))
+       (descriptor (make-descriptor type descriptor-fun
+                                    :description description
+                                    :id id)))
+  (set-kr-standard-descriptor :spectral-centroid descriptor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** standard-descriptors/spectral-rolloff
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This returns the spectral rolloff, signifying:
+;;; "Frequency below which 85% of energy exists." [sturm2004]
+;;;
+;;; NB: Requires LibXtract Vamp plugins
+;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(let* ((id 'spectral-rolloff)
+       (rdf-skeleton
+         (get-vamp-plugin-skeleton
+          "vamp:vamp-libxtract:rolloff:rolloff"))
+       (description "Extract the rolloff point of an audio spectrum.")
+       (type :number)
+       (descriptor-gensym (generic-symbol id))
+       (rdf-file (path-from-src-dir "vamp/spectral-rolloff.n3"))
+       (descriptor-fun (make-vamp-descriptor-fun rdf-file
+                                                 :ignore-window-size nil))
+       (descriptor (make-descriptor type descriptor-fun
+                                    :description description
+                                    :id id)))
+  (set-kr-standard-descriptor :spectral-rolloff descriptor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** standard-descriptors/inharmonicity
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This returns the inharmonicity of the audio spectrum.
+;;;
+;;; NB: Requires LibXtract Vamp plugins
+;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(let* ((id 'inharmonicity)
+       (rdf-skeleton
+         (get-vamp-plugin-skeleton
+          "vamp:vamp-libxtract:spectral_inharmonicity:spectral_inharmonicity"))
+       (description "Extract the inharmonicity of an audio spectrum.")
+       (type :number)
+       (descriptor-gensym (generic-symbol id))
+       (rdf-file (path-from-src-dir "vamp/inharmonicity.n3"))
+       (descriptor-fun (make-vamp-descriptor-fun rdf-file
+                                                 :ignore-window-size nil))
+       (descriptor (make-descriptor type descriptor-fun
+                                    :description description
+                                    :id id)))
+  (set-kr-standard-descriptor :inharmonicity descriptor))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****** standard-descriptors/f0
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; This returns an estimation of the fundamental frequency.
+;;;
+;;; NB: Requires LibXtract Vamp plugins
+;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(let* ((id 'f0)
+       (rdf-skeleton
+         (get-vamp-plugin-skeleton
+          "vamp:vamp-libxtract:f0:f0"))
+       (description "Extract the fundamental frequency of an audio signal.")
+       (type :number)
+       (descriptor-gensym (generic-symbol id))
+       (rdf-file (path-from-src-dir "vamp/f0.n3"))
+       (descriptor-fun (make-vamp-descriptor-fun rdf-file
+                                                 :ignore-window-size nil))
+       (descriptor (make-descriptor type descriptor-fun
+                                    :description description
+                                    :id id)))
+  (set-kr-standard-descriptor :f0 descriptor))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; TESTS:
+(let* ((drf (descriptor-fun
+             (get-kr-standard-descriptor :rms)))
+       (sndfile (make-sndfile
+                 "/Users/rubenphilipp/code/klitter/examples/snd/kalimba.wav")))
+  (funcall drf sndfile 512 1024))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF standard-descriptors.lisp

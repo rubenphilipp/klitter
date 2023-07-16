@@ -27,11 +27,12 @@
 - [[https://github.com/csound/csound][Csound]]
 - [[https://vamp-plugins.org][Vamp Plugins]] for analyses / feature extraction and [[https://vamp-plugins.org/sonic-annotator/][Sonic Annotator]]
   - [[https://www.vamp-plugins.org/plugin-doc/vamp-example-plugins.html][The VAMP Example Plugins]]
+  - [[https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins][LibXtract Vamp Plugins]]
 
 
 Tested with /SBCL/.
 
 
 #+begin_comment
-$$ Last modified:  20:18:03 Sun Jul 16 2023 CEST
+$$ Last modified:  22:02:00 Sun Jul 16 2023 CEST
 #+end_comment
