@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  17:17:07 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  15:53:09 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -137,6 +137,77 @@
          (mins (read-from-string (subseq string 0 pos)))
          (secs (read-from-string (subseq string (1+ pos)))))
     (+ (* 60.0 mins) secs)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/simple-shell
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Run a shell command from lisp and return the exit code.
+;;;
+;;; ARGUMENTS
+;;; - The shell command (i.e., most likely, path to the binary)
+;;; 
+;;; OPTIONAL ARGUMENTS:
+;;; rest:
+;;; - The arguments to the shell program.
+;;; 
+;;; RETURN VALUE
+;;; The the exit-code of the process.
+;;;
+;;; SYNOPSIS
+(defun simple-shell (command &rest arguments)
+  ;;; ****
+  (cl-user::process-exit-code
+   (cl-user::run-program command arguments :output *standard-output*
+                                           :wait t :input nil)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/shell
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Runs a shell program and return the full result as a string or throws an
+;;; error when the call to the program fails.
+;;;
+;;; ARGUMENTS
+;;; - The command (e.g. a path to a binary).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; rest:
+;;; - The arguments to the shell program. 
+;;; 
+;;; RETURN VALUE
+;;; The result of the shell program call as a string.
+;;;
+;;; EXAMPLE
+#|
+(shell (get-kr-config :sa-command) "-v")
+;; => "1.6"
+|#
+;;; SYNOPSIS
+(defun shell (command &rest arguments)
+  ;;; ****
+  (multiple-value-bind (output error-output exit-code)
+      (uiop:run-program (cons command arguments)
+                        :output :string
+                        :error-output :string
+                        :ignore-error-status t)
+    (unless (zerop exit-code)
+      (error "utilities::shell: The call to ~a failed. Error output: ~a ~%"
+             command error-output))
+    output))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utilities.lisp

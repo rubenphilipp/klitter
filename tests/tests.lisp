@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  19:41:55 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  15:53:48 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -78,6 +78,11 @@
          (= (klitter::end sndfile) 7.0)
          (= (klitter::duration sndfile) 5.0)))))
 
+;;; test shell
+;;; RP  Sun Jul 16 15:53:24 2023
+(test test-shell
+  (let* ((result (klitter::shell "pwd")))
+    (is (stringp result))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
