@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; System definition (ASDF) for klitter.
 ;;;
-;;; $$ Last modified:  23:10:25 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  00:19:27 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -38,6 +38,8 @@
                (:file "sndfile")
                (:file "descriptor")
                (:file "description")
+               (:file "descriptor-corpus")
+               (:file "description-corpus")
                (:file "vamp")
                (:file "standard-descriptors")
                (:file "klitter")))

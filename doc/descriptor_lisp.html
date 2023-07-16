@@ -28,9 +28,9 @@
 <div id="content">
 <hr />
 <a name="descriptor2fmake2ddescriptor"></a>
-<a name="robo4"></a><h2>descriptor/make-descriptor [ Functions ]</h2>
+<a name="robo5"></a><h2>descriptor/make-descriptor [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo10">descriptor</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">descriptor</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -38,12 +38,12 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Helper function to create a <a href="#robo10">descriptor</a> object.
+<pre> Helper function to create a <a href="#robo11">descriptor</a> object.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - The type of the <a href="#robo10">descriptor</a>. Either :number or :text.
- - The <a href="#robo10">descriptor</a>-fun. This function must take three arguments:
-   - a <a href="./sndfile_lisp.html#robo11">sndfile</a>-object to <a href="./description_lisp.html#robo3">analyse</a>/described
+<pre> - The type of the <a href="#robo11">descriptor</a>. Either :number or :text.
+ - The <a href="#robo11">descriptor</a>-fun. This function must take three arguments:
+   - a <a href="./sndfile_lisp.html#robo12">sndfile</a>-object to <a href="./description_lisp.html#robo3">analyse</a>/described
    - the hop-size of the analysis (in samples)
    - the window-size of the analysis (in samples)
    and must return a list of lists of the form:
@@ -52,29 +52,29 @@
      ...
      (timestamp-n valuea-n valueb-n ... valuen-n)
    The timestamp is in seconds, the value corresponds to the type of the
-   <a href="#robo10">descriptor</a>, thus could be either a number (e.g. a float) or a string
+   <a href="#robo11">descriptor</a>, thus could be either a number (e.g. a float) or a string
    (e.g. "metallic").
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
- - :<a href="./description_lisp.html#robo9">description</a>. An optional <a href="./description_lisp.html#robo9">description</a> of the <a href="#robo10">descriptor</a>. Must be a
+ - :<a href="./description_lisp.html#robo10">description</a>. An optional <a href="./description_lisp.html#robo10">description</a> of the <a href="#robo11">descriptor</a>. Must be a
    string.
- - :id. The id of the <a href="#robo10">descriptor</a>.
+ - :id. The id of the <a href="#robo11">descriptor</a>.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="#robo10">descriptor</a> object. 
+<pre> The <a href="#robo11">descriptor</a> object. 
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>make-descriptor</strong> (type <a href="#robo10">descriptor</a>-fun
-                        &amp;key (<a href="./description_lisp.html#robo9">description</a> "")
+<pre class="source">(defun <strong>make-descriptor</strong> (type <a href="#robo11">descriptor</a>-fun
+                        &amp;key (<a href="./description_lisp.html#robo10">description</a> "")
                           id)
 </pre>
 
 <hr />
 <a name="named2dobject2fdescriptor"></a>
-<a name="robo10"></a><h2>named-object/descriptor [ Classes ]</h2>
+<a name="robo11"></a><h2>named-object/descriptor [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo8">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo9">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>descriptor</strong>
 </pre>
@@ -87,21 +87,21 @@
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>descriptor</strong> class. This class contains generic
  informations on <strong>descriptor</strong> types and links to a <strong>descriptor</strong> function
- which should take three arguments (a <a href="./sndfile_lisp.html#robo11">sndfile</a>-object, the hop- and
+ which should take three arguments (a <a href="./sndfile_lisp.html#robo12">sndfile</a>-object, the hop- and
  window-size of the analysis) and is supposed to return a list of lists
- formatted as described in <a href="#robo4">make-descriptor</a>.
+ formatted as described in <a href="#robo5">make-descriptor</a>.
  The timestamp is in seconds, the value depends on the <strong>descriptor</strong>-type
  (could be either :text or :number).
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo8">named-object</a> -&gt; <strong>descriptor</strong>
+ <a href="./named-object_lisp.html#robo9">named-object</a> -&gt; <strong>descriptor</strong>
 
  $$ Last modified:  21:33:28 Sun Jul 16 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 23:45:39</p>
+<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 00:36:46</p>
 </div> <!-- footer -->
 </body>
 </html>
