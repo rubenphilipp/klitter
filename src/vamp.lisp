@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  22:02:46 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:45:32 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -338,16 +338,16 @@
                        "-w"
                        "csv"
                        "--csv-stdout")))
-    ;; parse strings to float
-    (mapcar #'(lambda (x)
-                (loop for i in x
-                      collect
-                      (parse-float i)))
-            ;; remove first column
-            (mapcar #'cdr
-                    ;;remove first row
-                    (cdr
-                     (cl-csv:read-csv result))))))
+    ;; remove NILs (e.g. resulting from description rows)
+    (remove nil
+            ;; parse strings to float
+            (mapcar #'(lambda (x)
+                        (loop for i in x
+                              collect
+                              (parse-float i)))
+                    ;; remove first column
+                    (mapcar #'cdr
+                            (cl-csv:read-csv result))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ****f* vamp/do-vamp-description

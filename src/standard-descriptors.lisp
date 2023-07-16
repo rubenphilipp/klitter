@@ -21,7 +21,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  22:40:24 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  22:44:14 Sun Jul 16 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -320,7 +320,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; TESTS:
 (let* ((drf (descriptor-fun
-             (get-kr-standard-descriptor :rms)))
+             (get-kr-standard-descriptor :spectral-centroid)))
        (sndfile (make-sndfile
                  "/Users/rubenphilipp/code/klitter/examples/snd/kalimba.wav")))
   (funcall drf sndfile 512 1024))
