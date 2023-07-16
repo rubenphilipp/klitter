@@ -42,12 +42,12 @@
 <p class="item_name">PURPOSE</p>
 <pre> Utility functions for klitter.
 
- $$ Last modified:  17:17:07 Sat Jul 15 2023 CEST
+ $$ Last modified:  15:53:09 Sun Jul 16 2023 CEST
 </pre>
 
 <hr />
 <a name="utilities2fmins2dsecs2dto2dsecs"></a>
-<a name="robo7"></a><h2>utilities/mins-secs-to-secs [ Functions ]</h2>
+<a name="robo11"></a><h2>utilities/mins-secs-to-secs [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">DESCRIPTION</p>
@@ -84,7 +84,7 @@
 
 <hr />
 <a name="utilities2fpath2dfrom2dsame2ddir"></a>
-<a name="robo8"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
+<a name="robo12"></a><h2>utilities/path-from-same-dir [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -110,8 +110,69 @@
 </pre>
 
 <hr />
+<a name="utilities2fshell"></a>
+<a name="robo13"></a><h2>utilities/shell [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Runs a <strong>shell</strong> program and return the full result as a string or throws an
+ error when the call to the program fails.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The command (e.g. a path to a binary).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> rest:
+ - The arguments to the <strong>shell</strong> program. 
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The result of the <strong>shell</strong> program call as a string.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">(<strong>shell</strong> (<a href="./globals_lisp.html#robo5">get-kr-config</a> :sa-command) "-v")
+;; =&gt; "1.6"
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>shell</strong> (command &amp;rest arguments)
+</pre>
+
+<hr />
+<a name="utilities2fsimple2dshell"></a>
+<a name="robo14"></a><h2>utilities/simple-shell [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> Run a <a href="#robo13">shell</a> command from lisp and return the exit code.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - The <a href="#robo13">shell</a> command (i.e., most likely, path to the binary)
+ 
+ OPTIONAL ARGUMENTS:
+ rest:
+ - The arguments to the <a href="#robo13">shell</a> program.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The the exit-code of the process.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>simple-shell</strong> (command &amp;rest arguments)
+</pre>
+
+<hr />
 <a name="utilities2ftrailing2dslash"></a>
-<a name="robo9"></a><h2>utilities/trailing-slash [ Functions ]</h2>
+<a name="robo15"></a><h2>utilities/trailing-slash [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">utilities</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -136,7 +197,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-15 19:32:49</p>
+<p>Generated from ./src/utilities.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 16:39:59</p>
 </div> <!-- footer -->
 </body>
 </html>

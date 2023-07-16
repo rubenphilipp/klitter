@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  16:27:41 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  16:39:42 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -86,10 +86,16 @@
 
 
 ;;; test make-descriptor
+;;; RP  Sun Jul 16 16:39:08 2023
 (test test-make-descriptor
   (let ((descr (klitter::make-descriptor :text #'(lambda (x y z) "nothing"))))
     (is (typep descr 'klitter::descriptor))))
 
+;;; test get-vamp-plugins
+;;; RP  Sun Jul 16 16:39:16 2023
+(test test-get-vamp-plugins
+  (let ((result (klitter::get-vamp-plugins)))
+    (is (listp result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

@@ -27,9 +27,9 @@
 <div id="content">
 <hr />
 <a name="named2dobject2fsndfile"></a>
-<a name="robo6"></a><h2>named-object/sndfile [ Classes ]</h2>
+<a name="robo9"></a><h2>named-object/sndfile [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo5">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo7">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>sndfile</strong>
 </pre>
@@ -48,14 +48,53 @@
  slippery-chicken (<a href="http://github.com/mdedwards/slippery-chicken)">http://github.com/mdedwards/slippery-chicken)</a>
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo5">named-object</a> -&gt; <strong>sndfile</strong>
+ <a href="./named-object_lisp.html#robo7">named-object</a> -&gt; <strong>sndfile</strong>
 
- $$ Last modified:  19:31:39 Sat Jul 15 2023 CEST
+ $$ Last modified:  19:46:47 Sat Jul 15 2023 CEST
+</pre>
+
+<hr />
+<a name="sndfile2fmake2dsndfile"></a>
+<a name="robo10"></a><h2>sndfile/make-sndfile [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo9">sndfile</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This is a helper function in order to create an instance of the
+ <a href="#robo9">sndfile</a>-class.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The path to the sound file.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> - :id. An id for the object. Default = NIL
+ - :data. Additional data linked to the object. Default = the path of them
+   <a href="#robo9">sndfile</a>
+ - :duration. The desired duration of the <a href="#robo9">sndfile</a> (in seconds). This should
+   not be specified if :end has been specified. When neither :end nor
+   :duration is set, the sound file will be considered as having to be
+   considered until its end. Default = NIL
+ - :end. The desired end time of the <a href="#robo9">sndfile</a> (in seconds). This should not
+   be specified if :duration has been specified. Default = NIL
+ - :start. The desired start time (in seconds). Default = 0.0
+ - :amplitude. An amplitude scaler (used in some processes). Default = 1.0
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The <a href="#robo9">sndfile</a>-object. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-sndfile</strong> (path &amp;key id data duration end (start 0.0)
+                            (amplitude 1.0))
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/sndfile.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-15 19:32:49</p>
+<p>Generated from ./src/sndfile.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-16 16:39:59</p>
 </div> <!-- footer -->
 </body>
 </html>
