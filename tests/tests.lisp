@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  16:39:42 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  16:48:23 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -96,6 +96,13 @@
 (test test-get-vamp-plugins
   (let ((result (klitter::get-vamp-plugins)))
     (is (listp result))))
+
+;;; test get-vamp-plugin-skeleton
+;;; RP  Sun Jul 16 16:47:27 2023
+(test test-get-vamp-plugin-skeleton
+  (let ((result (klitter::get-vamp-plugin-skeleton
+                 "vamp:vamp-example-plugins:amplitudefollower:amplitude")))
+    (is (stringp result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

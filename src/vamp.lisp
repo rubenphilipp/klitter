@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;;
 ;;;
-;;; $$ Last modified:  16:38:55 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  16:47:10 Sun Jul 16 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -65,25 +65,46 @@
           when plugin?
             collect pl)))
         
-
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* vamp/get-vamp-plugin-skeleton
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; Returns the skeleton of the RDF-file for a given VAMP transform which is
+;;; required for analysing a sndfile.
+;;; Cf. https://code.soundsoftware.ac.uk/projects/sonic-annotator/wiki\\
+;;; #2-What-features-to-extract
+;;;
+;;; ARGUMENTS
+;;; - The transform id (e.g. retrieved via get-vamp-plugins). Must be a string.
+;;; 
+;;; RETURN VALUE
+;;; A string with the sekelton of the VAMP transform's RDF file. 
+;;;
+;;; EXAMPLE
 #|
-(let ((plugins (shell (get-kr-config :sa-command) "--list")))
-  (print (format nil "~a" plugins)))
+(get-vamp-plugin-skeleton "vamp:azi:azi:plan")
+;; =>
+;; "@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+;; @prefix vamp:     <http://purl.org/ontology/vamp/> .
+;; @prefix :         <#> .
 
-(shell (get-kr-config :sa-command) "--list")
-
-(multiple-value-bind (output error-output exit-code)
-    (uiop:run-program (list (get-kr-config :sa-command)
-                            "--list")
-                      :output :string
-                      :error-output :string
-                      :ignore-error-status t)
-  (if (zerop exit-code)
-      (format t "outout is: ~a" output)
-(format t "error-output is: ~a" error-output)))
+;; :transform_plugin a vamp:Plugin ;
+;;     vamp:identifier \"azi\" .
+;; [...]
 |#
+;;; SYNOPSIS
+(defun get-vamp-plugin-skeleton (transform-id)
+  ;;; ****
+  (let ((result (shell (get-kr-config :sa-command)
+                       "--skeleton"
+                       transform-id)))
+    result))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF vamp.lisp
