@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  18:43:14 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  19:38:40 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -108,9 +108,9 @@
 ;;; 
 ;;; RETURN VALUE
 ;;; A list of lists of the form:
-;;; '((seg-onset1 ((:descriptor1 . value1)
-;;;                ...
-;;;                (:descriptorn . valuen)))
+;;; '((seg-onset1 seg-dur ((:descriptor1 . value1)
+;;;                        ...
+;;;                        (:descriptorn . valuen)))
 ;;;   ...)
 ;;;
 ;;; SYNOPSIS
@@ -123,8 +123,9 @@
                                        (descriptor-corpus descr)))))
     (loop for segment in segments
           for onset = (first segment)
+          for duration = (second segment)
           collect
-          (list onset
+          (list onset duration
                 (loop for key in description-keys
                       for description = (assoc-value (data descr) key)
                       for data = (data description)
@@ -150,9 +151,10 @@
 ;;; (cf. get-feature-vectors-from-target) in a description-corpus. From all
 ;;; possible candidates, it selects a random candidate and thus returns a
 ;;; list of the following form:
-;;; '((tfv-onset-n c-onset-n) ...)
+;;; '((tfv-onset-n tfv-dur-n c-onset-n) ...)
 ;;;
 ;;; - tfv-onset is the onset time in the target feature-vector
+;;; - tfv-dur is the duration of the fragment
 ;;; - c-onset is the onset time in the sndfile of the description-corpus object.
 ;;;
 ;;; The search is performed by looking up for frames in the description-corpus
@@ -222,11 +224,13 @@
     ;; seg = segment / frame
     (loop for seg in target-vector
           for target-onset = (car seg)
-          for target-descriptors = (second seg)
+          for target-duration = (second seg)
+          for target-descriptors = (third seg)
           with descriptor-keys = features
           collect
           (list
            target-onset
+           target-duration
            ;; descriptor by descriptor
            ;; this results in a list with ids of elements
            (loop
@@ -302,8 +306,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Pan functions
 
-(defun no-pan (start-time duration index total-fragments)
-  (declare (ignore start-time duration index total-fragments))
+(defun no-pan (start-time frag-duration index total-fragments)
+  (declare (ignore start-time frag-duration index total-fragments))
   0.5)
 
 
@@ -349,6 +353,16 @@
 ;;;   - The total fragments to be generated in the synthesis-process
 ;;;     (zero-based).
 ;;;   and returns a value 0<=f<=1. Default = #'no-pan
+;;; - :start-offset. A number which is the start offset of the synthesis.
+;;;   Default = 0.0
+;;; - :snd-ftables-st. The starting number for the automatic generation of
+;;;   the soundfile ftables (required e.g. for stereo files). Default = 31.
+;;; - :windowing-function. The windowing function for the fragments as a
+;;;   list. The elements are the parameters for a GEN table which will also
+;;;   be added to the score.
+;;;   The parameters are as follows (cf. Csound manual for GEN20):
+;;;   '(# time size window max [opt])
+;;;   Default = '(100 0 8192 20 2)   (hanning window)
 ;;; 
 ;;; RETURN VALUE
 ;;; The path of the score-file.
@@ -370,13 +384,90 @@
                                (overlap-exp 1)
                                (pitch 1.0)
                                (pitch-exp 1)
-                               (pan-fun #'no-pan))
+                               (pan-fun #'no-pan)
+                               (start-offset 0.0)
+                               (snd-ftables-st 31)
+                               (windowing-function '(100 0 8192 20 2)))
   ;;; ****
-  )
-
-
-
-
+  (let* ((total-fragments (length candidate-list))
+         (snd-chans (channels sndfile))
+         (snd-ftables (loop for i from 0 to (1- snd-chans)
+                            with stch = snd-ftables-st
+                            collect
+                            (+ i stch))))
+    ;; initialize and scale envelopes
+    (setf amp (if (numberp amp)
+                  `(0 ,amp ,total-fragments ,amp)
+                  (sc::auto-scale-env amp
+                                      :x-min 0
+                                      :x-max total-fragments
+                                      :y-min (sc::env-y-min amp)
+                                      :y-max (sc::env-y-max amp)))
+          overlap (if (numberp overlap)
+                      `(0 ,overlap ,total-fragments ,overlap)
+                      (sc::auto-scale-env overlap
+                                          :x-min 0
+                                          :x-max total-fragments
+                                          :y-min (sc::env-y-min overlap)
+                                          :y-max (sc::env-y-max overlap)))
+          pitch (if (numberp pitch)
+                  `(0 ,pitch ,total-fragments ,pitch)
+                  (sc::auto-scale-env pitch
+                                      :x-min 0
+                                      :x-max total-fragments
+                                      :y-min (sc::env-y-min pitch)
+                                      :y-max (sc::env-y-max pitch))))
+    ;; now start the synth-process
+    (loop for i from 0 to (1- total-fragments)
+          for fragment = (nth i candidate-list)
+          ;; the start position in the sndfile
+          for source-st = (third fragment)
+          ;; the playback duration of the fragment
+          for frag-dur = (second fragment)
+          with st-time = start-offset
+          for pan = (funcall pan-fun st-time frag-dur i total-fragments)
+          for e-amp = (sc::interpolate i amp :exp amp-exp)
+          for e-pitch = (sc::interpolate i pitch :exp pitch-exp)
+          for e-overlap = (sc::interpolate i overlap :exp overlap-exp)
+          ;; the score events
+          with sco-events = '()
+          do
+             ;; just add something to the list when there
+             ;; is a candidate
+             (when source-st
+               (loop for i from 0 to (1- snd-chans)
+                     for snd-ft = (nth i snd-ftables)
+                     do
+                        (push
+                         (list insnum st-time frag-dur e-amp snd-ft
+                               (first windowing-function) source-st
+                               e-pitch pan)
+                         sco-events)))
+             (setf st-time (+ st-time (- frag-dur e-overlap)))
+          finally
+             (with-open-file (stream sco-file :direction :output
+                                              :if-exists :supersede
+                                              :if-does-not-exist :create)
+               ;; create sndfile ftables
+               (loop for snd-ft in snd-ftables
+                     for chan from 1
+                     do
+                        (format stream
+                                "f ~a 0 0 1 \"~a\" 0 0~a ~%"
+                                snd-ft (path sndfile) chan))
+               ;; create windowing table
+               (format stream
+                       "f ~{~a ~} ~%"
+                       windowing-function)
+               ;; write instrument events
+               (loop for e in (reverse sco-events)
+                     do
+                        (format stream
+                                "~{i ~a ~,4f ~,4f ~,4f ~a ~a ~,4f ~,4f ~
+                                 ~,4f~} ~%" e)))))
+  ;; return filename
+  sco-file)
+                                   
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

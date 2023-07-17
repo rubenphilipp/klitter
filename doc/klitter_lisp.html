@@ -48,7 +48,7 @@
  CLASS HIERARCHY
  none. no classes defined
 
- $$ Last modified:  18:07:53 Mon Jul 17 2023 CEST
+ $$ Last modified:  19:38:40 Mon Jul 17 2023 CEST
 </pre>
 
 <hr />
@@ -64,20 +64,21 @@
 </pre>
 <p class="item_name">DESCRIPTION</p>
 <pre> This methods performs a search for matches of a target feature-vector
- (cf. get-feature-vectors-from-target) in a <a href="./description_lisp.html#robo17">description</a>-corpus. From all
+ (cf. get-feature-vectors-from-target) in a <a href="./description_lisp.html#robo18">description</a>-corpus. From all
  possible candidates, it selects a random candidate and thus returns a
  list of the following form:
- '((tfv-onset-n c-onset-n) ...)
+ '((tfv-onset-n tfv-dur-n c-onset-n) ...)
 
  - tfv-onset is the onset time in the target feature-vector
- - c-onset is the onset time in the <a href="./sndfile_lisp.html#robo19">sndfile</a> of the <a href="./description_lisp.html#robo17">description</a>-corpus object.
+ - tfv-dur is the duration of the fragment
+ - c-onset is the onset time in the <a href="./sndfile_lisp.html#robo20">sndfile</a> of the <a href="./description_lisp.html#robo18">description</a>-corpus object.
 
- The search is performed by looking up for frames in the <a href="./description_lisp.html#robo17">description</a>-corpus
+ The search is performed by looking up for frames in the <a href="./description_lisp.html#robo18">description</a>-corpus
  that match the target feature-vector within a given tolerance (relative
  to the range of the feature values. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="./description_lisp.html#robo17">description</a>-corpus object.
+<pre> - A <a href="./description_lisp.html#robo18">description</a>-corpus object.
  - A target feature-vector (e.g. generated via
    get-feature-vectors-from-target)
 </pre>
@@ -85,10 +86,10 @@
 <pre> keyword-arguments:
  - :features. A list with the ids of features to be included in the
    matching process. Default = '()
- - :tolerance. An alist of the form '((:<a href="./descriptor_lisp.html#robo18">descriptor</a>-n . 0.2) ...)
-   The <a href="./descriptor_lisp.html#robo18">descriptor</a> must be named according to the <a href="./descriptor_lisp.html#robo18">descriptor</a> name of the
-   <a href="./description_lisp.html#robo17">description</a>-corpus. The value is relative to the value range. When
-   a <a href="./descriptor_lisp.html#robo18">descriptor</a> is not present in this alist, the :default-tolerance will
+ - :tolerance. An alist of the form '((:<a href="./descriptor_lisp.html#robo19">descriptor</a>-n . 0.2) ...)
+   The <a href="./descriptor_lisp.html#robo19">descriptor</a> must be named according to the <a href="./descriptor_lisp.html#robo19">descriptor</a> name of the
+   <a href="./description_lisp.html#robo18">description</a>-corpus. The value is relative to the value range. When
+   a <a href="./descriptor_lisp.html#robo19">descriptor</a> is not present in this alist, the :default-tolerance will
    be applied. Default = '()
  - :default-tolerance. This is a number which is the default tolerance,
    applied to all descriptors which are not explicitly allocated a tolerance
@@ -99,7 +100,7 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-candidate-from-feature-vector</strong> ((dc <a href="./description_lisp.html#robo17">description</a>-corpus)
+<pre class="source">(defmethod <strong>get-candidate-from-feature-vector</strong> ((dc <a href="./description_lisp.html#robo18">description</a>-corpus)
                                                target-vector
                                                &amp;key
                                                  (features '())
@@ -121,11 +122,11 @@
 <p class="item_name">DESCRIPTION</p>
 <pre> This method returns for each onset in a list of segments (e.g. generated
  via get-segments) an alist containing the target vector for each analysis
- frame in a <a href="./description_lisp.html#robo17">description</a>-corpus object closest to the onset in the segment
+ frame in a <a href="./description_lisp.html#robo18">description</a>-corpus object closest to the onset in the segment
  list.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="./description_lisp.html#robo17">description</a>-corpus object.
+<pre> - A <a href="./description_lisp.html#robo18">description</a>-corpus object.
  - A list of segments (e.g. generated via get-segments).
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
@@ -133,13 +134,13 @@
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> A list of lists of the form:
- '((seg-onset1 ((:descriptor1 . value1)
-                ...
-                (:descriptorn . valuen)))
+ '((seg-onset1 seg-dur ((:descriptor1 . value1)
+                        ...
+                        (:descriptorn . valuen)))
    ...)
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-feature-vectors-from-target</strong> ((descr <a href="./description_lisp.html#robo17">description</a>-corpus) segments)
+<pre class="source">(defmethod <strong>get-feature-vectors-from-target</strong> ((descr <a href="./description_lisp.html#robo18">description</a>-corpus) segments)
 </pre>
 
 <hr />
@@ -154,31 +155,111 @@
 <pre> 2023-07-17
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This methods generates segments from a <a href="./sndfile_lisp.html#robo19">sndfile</a> object. It generates a list
+<pre> This methods generates segments from a <a href="./sndfile_lisp.html#robo20">sndfile</a> object. It generates a list
  of lists with onsets and durations of each segment according to the length
- of the <a href="./sndfile_lisp.html#robo19">sndfile</a> and an envelope which indicates the duration of each segment
- along the length of the <a href="./sndfile_lisp.html#robo19">sndfile</a> (in seconds). 
+ of the <a href="./sndfile_lisp.html#robo20">sndfile</a> and an envelope which indicates the duration of each segment
+ along the length of the <a href="./sndfile_lisp.html#robo20">sndfile</a> (in seconds). 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="./sndfile_lisp.html#robo19">sndfile</a> object.
+<pre> - A <a href="./sndfile_lisp.html#robo20">sndfile</a> object.
  - An envelope with the duration of the segments. 
 </pre>
 <p class="item_name">RETURN VALUE</p>
 <pre> A list of lists with onsets and durations of the segments. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((<a href="./sndfile_lisp.html#robo19">sndfile</a> (<a href="./sndfile_lisp.html#robo20">make-sndfile</a>
-                 (<a href="./utilities_lisp.html#robo35">path-from-same-dir</a> "../examples/snd/kalimba.wav")))
+<pre class="source">(let ((<a href="./sndfile_lisp.html#robo20">sndfile</a> (<a href="./sndfile_lisp.html#robo21">make-sndfile</a>
+                 (<a href="./utilities_lisp.html#robo36">path-from-same-dir</a> "../examples/snd/kalimba.wav")))
        (env '(0 .02 20 .04 50 .06 80 .03 100 .01)))
-  (<strong>get-segments</strong> <a href="./sndfile_lisp.html#robo19">sndfile</a> env))
+  (<strong>get-segments</strong> <a href="./sndfile_lisp.html#robo20">sndfile</a> env))
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>get-segments</strong> ((obj <a href="./sndfile_lisp.html#robo19">sndfile</a>) env)
+<pre class="source">(defmethod <strong>get-segments</strong> ((obj <a href="./sndfile_lisp.html#robo20">sndfile</a>) env)
+</pre>
+
+<hr />
+<a name="klitter2fsynthesize2dscore"></a>
+<a name="robo17"></a><h2>klitter/synthesize-score [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">klitter</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-17
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This method generates a Csound score from a candidates list (cf.
+ get-candidate-from-feature-vector) to be used in conjunction with the
+ synth1.orc csound orchestra.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> - A <a href="./sndfile_lisp.html#robo20">sndfile</a> object (should be the <a href="./sndfile_lisp.html#robo20">sndfile</a> object which has been used
+   to generate the candidate list.
+ - A candidate list (generated by get-candidate-from-feature-vector).
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> keyword-arguments:
+ - :sco-file. The location for the output score. Default = A file path
+   relative to the default output directory.
+ - :amp. A number or an envelope used to scale the global
+   amplitude. Default = 1.0
+ - :amp-exp. The exponent for amplitude-scaling. Default = 1
+ - :insnum. The instrument number used for the p-fields. Default = 1
+   (this is the standard instrument in synth1.orc)
+ - :overlap. The overlap time of the fragments/frames (in seconds).
+   Can be a number or an envelope.
+   Default = .005
+ - :overlap-exp. The exponent for overlap-scaling. Default = 1
+ - :pitch. The pitch alteration (via playback speed). Either a number or an
+   envelope. Default = 1.0
+ - :pitch-exp. The exponent for pitch-env scaling. Default = 1
+ - :pan-fun. A function which takes four arguments:
+   - The start time (in seconds) of the fragment
+   - The duration (in seconds) of the fragment
+   - The index of the fragment, as an indicator of the location in the
+     synthesis-process (zero-based).
+   - The total fragments to be generated in the synthesis-process
+     (zero-based).
+   and returns a value 0&lt;=f&lt;=1. Default = #'no-pan
+ - :start-offset. A number which is the start offset of the synthesis.
+   Default = 0.0
+ - :snd-ftables-st. The starting number for the automatic generation of
+   the soundfile ftables (required e.g. for stereo files). Default = 31.
+ - :windowing-function. The windowing function for the fragments as a
+   list. The elements are the parameters for a GEN table which will also
+   be added to the score.
+   The parameters are as follows (cf. Csound manual for GEN20):
+   '(# time size window max [opt])
+   Default = '(100 0 8192 20 2)   (hanning window)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The path of the score-file.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defmethod <strong>synthesize-score</strong> ((<a href="./sndfile_lisp.html#robo20">sndfile</a> <a href="./sndfile_lisp.html#robo20">sndfile</a>) candidate-list
+                             &amp;key
+                               (sco-file (concatenate
+                                          'string
+                                          (<a href="./globals_lisp.html#robo11">get-kr-config</a> :default-dir)
+                                          "kr-synth.sco"))
+                               (amp 1.0)
+                               (amp-exp 1)
+                               (insnum 1)
+                               (overlap .005)
+                               (overlap-exp 1)
+                               (pitch 1.0)
+                               (pitch-exp 1)
+                               (pan-fun #'no-pan)
+                               (start-offset 0.0)
+                               (snd-ftables-st 31)
+                               (windowing-function '(100 0 8192 20 2)))
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/klitter.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 18:08:03</p>
+<p>Generated from ./src/klitter.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 19:39:12</p>
 </div> <!-- footer -->
 </body>
 </html>

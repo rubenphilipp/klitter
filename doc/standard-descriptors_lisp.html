@@ -28,7 +28,7 @@
 <div id="content">
 <hr />
 <a name="standard2ddescriptors2f2bkr2dstandard2ddescriptors2b"></a>
-<a name="robo21"></a><h2>standard-descriptors/+kr-standard-descriptors+ [ Variables ]</h2>
+<a name="robo22"></a><h2>standard-descriptors/+kr-standard-descriptors+ [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -38,13 +38,13 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This global hols a set of <a href="./descriptor_lisp.html#robo18">descriptor</a> objects as implemented in this file.
+<pre> This global hols a set of <a href="./descriptor_lisp.html#robo19">descriptor</a> objects as implemented in this file.
  
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3af0"></a>
-<a name="robo22"></a><h2>standard-descriptors/:f0 [ Variables ]</h2>
+<a name="robo23"></a><h2>standard-descriptors/:f0 [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -60,12 +60,12 @@
      <a href="https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins">https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins</a>
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> <strong>:f0</strong>)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> <strong>:f0</strong>)
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3ainharmonicity"></a>
-<a name="robo23"></a><h2>standard-descriptors/:inharmonicity [ Variables ]</h2>
+<a name="robo24"></a><h2>standard-descriptors/:inharmonicity [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -84,27 +84,27 @@
  algorithm. 
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> <strong>:inharmonicity</strong>)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> <strong>:inharmonicity</strong>)
  
  (let* ((id 'inharmonicity)
         (rdf-skeleton
-          (<a href="./vamp_lisp.html#robo42">get-vamp-plugin-skeleton</a>
+          (<a href="./vamp_lisp.html#robo43">get-vamp-plugin-skeleton</a>
            "<a href="./vamp_lisp.html#robo3">vamp</a>:<a href="./vamp_lisp.html#robo3">vamp</a>-libxtract:spectral_inharmonicity:spectral_inharmonicity"))
-        (<a href="./description_lisp.html#robo17">description</a> "Extract the inharmonicity of an audio spectrum.")
+        (<a href="./description_lisp.html#robo18">description</a> "Extract the inharmonicity of an audio spectrum.")
         (type :number)
-        (<a href="./descriptor_lisp.html#robo18">descriptor</a>-gensym (<a href="./utilities_lisp.html#robo33">generic-symbol</a> id))
-        (rdf-file (<a href="./utilities_lisp.html#robo36">path-from-src-dir</a> "<a href="./vamp_lisp.html#robo3">vamp</a>/inharmonicity.n3"))
-        (<a href="./descriptor_lisp.html#robo18">descriptor</a>-fun (<a href="#robo29">make-vamp-descriptor-fun</a> rdf-file
+        (<a href="./descriptor_lisp.html#robo19">descriptor</a>-gensym (<a href="./utilities_lisp.html#robo34">generic-symbol</a> id))
+        (rdf-file (<a href="./utilities_lisp.html#robo37">path-from-src-dir</a> "<a href="./vamp_lisp.html#robo3">vamp</a>/inharmonicity.n3"))
+        (<a href="./descriptor_lisp.html#robo19">descriptor</a>-fun (<a href="#robo30">make-vamp-descriptor-fun</a> rdf-file
                                                   :ignore-window-size t))
-        (<a href="./descriptor_lisp.html#robo18">descriptor</a> (<a href="./descriptor_lisp.html#robo9">make-descriptor</a> type <a href="./descriptor_lisp.html#robo18">descriptor</a>-fun
-                                     :<a href="./description_lisp.html#robo17">description</a> <a href="./description_lisp.html#robo17">description</a>
+        (<a href="./descriptor_lisp.html#robo19">descriptor</a> (<a href="./descriptor_lisp.html#robo9">make-descriptor</a> type <a href="./descriptor_lisp.html#robo19">descriptor</a>-fun
+                                     :<a href="./description_lisp.html#robo18">description</a> <a href="./description_lisp.html#robo18">description</a>
                                      :id id)))
-   (<a href="#robo30">set-kr-standard-descriptor</a> <strong>:inharmonicity</strong> <a href="./descriptor_lisp.html#robo18">descriptor</a>))
+   (<a href="#robo31">set-kr-standard-descriptor</a> <strong>:inharmonicity</strong> <a href="./descriptor_lisp.html#robo19">descriptor</a>))
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3arms"></a>
-<a name="robo24"></a><h2>standard-descriptors/:rms [ Variables ]</h2>
+<a name="robo25"></a><h2>standard-descriptors/:rms [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -121,13 +121,13 @@
      <a href="https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins">https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins</a>
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> <strong>:rms</strong>)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> <strong>:rms</strong>)
  
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3aspectral2dcentroid"></a>
-<a name="robo25"></a><h2>standard-descriptors/:spectral-centroid [ Variables ]</h2>
+<a name="robo26"></a><h2>standard-descriptors/:spectral-centroid [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -144,13 +144,13 @@
      <a href="https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins">https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins</a>
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> :spectral-centroid)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> :spectral-centroid)
  
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3aspectral2drolloff"></a>
-<a name="robo26"></a><h2>standard-descriptors/:spectral-rolloff [ Variables ]</h2>
+<a name="robo27"></a><h2>standard-descriptors/:spectral-rolloff [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -167,13 +167,13 @@
      <a href="https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins">https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins</a>
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> :spectral-rolloff)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> :spectral-rolloff)
  
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2f3azero2dcrossings"></a>
-<a name="robo27"></a><h2>standard-descriptors/:zero-crossings [ Variables ]</h2>
+<a name="robo28"></a><h2>standard-descriptors/:zero-crossings [ Variables ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_variables.html#robo_top_of_doc">Variables</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -187,13 +187,13 @@
  "General noisiness, existence of transients" [sturm2004]
 </pre>
 <p class="item_name">USAGE</p>
-<pre> (<a href="#robo28">get-kr-standard-descriptor</a> :zero-crossings)
+<pre> (<a href="#robo29">get-kr-standard-descriptor</a> :zero-crossings)
 
 </pre>
 
 <hr />
 <a name="standard2ddescriptors2fget2dkr2dstandard2ddescriptor"></a>
-<a name="robo28"></a><h2>standard-descriptors/get-kr-standard-descriptor [ Functions ]</h2>
+<a name="robo29"></a><h2>standard-descriptors/get-kr-standard-descriptor [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -203,7 +203,7 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Returns the object of a standard <a href="./descriptor_lisp.html#robo18">descriptor</a> from <a href="#robo21">+kr-standard-descriptors+</a>.
+<pre> Returns the object of a standard <a href="./descriptor_lisp.html#robo19">descriptor</a> from <a href="#robo22">+kr-standard-descriptors+</a>.
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>get-kr-standard-descriptor</strong> (key)
@@ -211,7 +211,7 @@
 
 <hr />
 <a name="standard2ddescriptors2fmake2dvamp2ddescriptor2dfun"></a>
-<a name="robo29"></a><h2>standard-descriptors/make-vamp-descriptor-fun [ Functions ]</h2>
+<a name="robo30"></a><h2>standard-descriptors/make-vamp-descriptor-fun [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -221,7 +221,7 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> This function generates a <a href="./descriptor_lisp.html#robo18">descriptor</a> function (to be used in <a href="./descriptor_lisp.html#robo18">descriptor</a>
+<pre> This function generates a <a href="./descriptor_lisp.html#robo19">descriptor</a> function (to be used in <a href="./descriptor_lisp.html#robo19">descriptor</a>
  objects) from a given RDF-file. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
@@ -233,10 +233,10 @@
    window size during analysis. Default = NIL.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The (lambda) function name of the <a href="./descriptor_lisp.html#robo18">descriptor</a>-fun. 
+<pre> The (lambda) function name of the <a href="./descriptor_lisp.html#robo19">descriptor</a>-fun. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((fname (<a href="./utilities_lisp.html#robo33">generic-symbol</a> 'centroid))
+<pre class="source">(let ((fname (<a href="./utilities_lisp.html#robo34">generic-symbol</a> 'centroid))
       (rdf-file "/tmp/test.n3"))
   (<strong>make-vamp-descriptor-fun</strong> fname rdf-file :ignore-window-size nil))
 
@@ -250,7 +250,7 @@
 
 <hr />
 <a name="standard2ddescriptors2fset2dkr2dstandard2ddescriptor"></a>
-<a name="robo30"></a><h2>standard-descriptors/set-kr-standard-descriptor [ Functions ]</h2>
+<a name="robo31"></a><h2>standard-descriptors/set-kr-standard-descriptor [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -269,7 +269,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/standard-descriptors.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 18:08:03</p>
+<p>Generated from ./src/standard-descriptors.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 19:39:12</p>
 </div> <!-- footer -->
 </body>
 </html>
