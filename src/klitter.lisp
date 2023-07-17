@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  19:38:40 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  19:54:12 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -453,7 +453,7 @@
                      for chan from 1
                      do
                         (format stream
-                                "f ~a 0 0 1 \"~a\" 0 0~a ~%"
+                                "f ~a 0 0 1 \"~a\" 0 0 ~a ~%"
                                 snd-ft (path sndfile) chan))
                ;; create windowing table
                (format stream
