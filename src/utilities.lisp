@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  22:41:06 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  10:50:40 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -268,6 +268,38 @@
   ;;; ****
   (alexandria:symbolicate
    (alexandria:make-gensym name)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/alistp
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; Tests if an object is of type alist.
+;;;
+;;; ARGUMENTS
+;;; The object to test.
+;;; 
+;;; RETURN VALUE
+;;; Either t or NIL
+;;;
+;;; EXAMPLE
+#|
+(alistp '((a . b)
+          (c . d)))
+
+;; => T
+|#
+;;; SYNOPSIS
+(defun alistp (object)
+  ;;; ****
+  (and (listp object)
+       (every #'consp object)))
+
 
 
 
