@@ -25,6 +25,7 @@
   - could be loaded via /ASDF/ thouh, this is not implemented yet
 - [[https://asdf.common-lisp.dev][ASDF]]
 - [[https://github.com/csound/csound][Csound]]
+- [[http://github.com/mdedwards/slippery-chicken][slippery-chicken]]
 - [[https://vamp-plugins.org][Vamp Plugins]] for analyses / feature extraction and [[https://vamp-plugins.org/sonic-annotator/][Sonic Annotator]]
   - [[https://www.vamp-plugins.org/plugin-doc/vamp-example-plugins.html][The VAMP Example Plugins]]
   - [[https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins][LibXtract Vamp Plugins]]
@@ -34,5 +35,5 @@ Tested with /SBCL/.
 
 
 #+begin_comment
-$$ Last modified:  22:02:00 Sun Jul 16 2023 CEST
+$$ Last modified:  12:22:23 Mon Jul 17 2023 CEST
 #+end_comment
