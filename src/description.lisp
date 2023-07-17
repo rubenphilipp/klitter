@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  01:48:24 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:51:27 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -90,7 +90,6 @@
 ;;; ARGUMENTS
 ;;; The description object.
 ;;; 
-;;; 
 ;;; RETURN VALUE
 ;;; The updated description object. 
 ;;;
@@ -109,8 +108,9 @@
   (data description))
 |#
 ;;; SYNOPSIS
-(defmethod analyse ((dn description))
+(defmethod analyse ((dn description) &key args)
   ;;; ****
+  (declare (ignore args))
   (let* ((descriptor-fun (descriptor-fun (descriptor dn)))
          (sndfile (sndfile dn))
          (hop-size (hop-size dn))

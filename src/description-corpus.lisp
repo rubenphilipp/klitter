@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  11:40:15 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:49:56 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -80,6 +80,10 @@
 ;;;
 ;;; ARGUMENTS
 ;;; The description-corpus object.
+;;;
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :verbose. Print the status of the analysis. Default = T.
 ;;; 
 ;;; RETURN VALUE
 ;;; The updated description-corpus object. 
@@ -104,13 +108,18 @@
 ;; => 2
 |#
 ;;; SYNOPSIS
-(defmethod analyse ((dnc description-corpus))
+(defmethod analyse ((dnc description-corpus) &key (verbose t))
   ;;; ****
   (let ((descriptors (descriptors (descriptor-corpus dnc))))
     (loop for key in (assoc-keys descriptors)
           for descr = (assoc-value descriptors key)
           with result = '()
           do
+             (when verbose
+               (format t "~%Analysing sndfile: ~a, ~% ~
+                          with descriptor: ~a"
+                       (path (sndfile dnc))
+                       (id descr)))
              (push 
               (make-instance 'description
                              :sndfile (sndfile dnc)
