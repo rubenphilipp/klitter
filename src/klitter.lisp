@@ -14,10 +14,16 @@
 ;;; concatenation algorithm.
 ;;; NB: It is still work in progress.
 ;;;
+;;; Literature:
+;;; [schwarz2006]: Schwarz, Diemo. 2006. „Concatenative Sound Synthesis:
+;;; The Early Years“. Journal of New Music Research 35 (1): 3–22.
+;;; https://doi.org/10.1080/09298210600696857.
+
+;;;
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  19:54:12 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  20:58:39 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -286,6 +292,9 @@
              finally
                 ;; randomly select a candidate and get the onset
                 ;; time; when nothing is found, return NIL
+                ;; ---
+                ;; This could also be the place for a function
+                ;; implementing "concatenation discance" (cf. [schwarz2006])
                 (if matches
                     (let* ((random-candidate
                              (nth (random (length matches)) matches))
@@ -309,6 +318,8 @@
 (defun no-pan (start-time frag-duration index total-fragments)
   (declare (ignore start-time frag-duration index total-fragments))
   0.5)
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
