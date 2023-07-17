@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  02:17:40 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:10:43 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -87,9 +87,9 @@
 ;;; EXAMPLE
 #|
 (let* ((dr-corpus (make-descriptor-corpus
-                   (list
-                    (get-kr-standard-descriptor :rms)
-                    (get-kr-standard-descriptor :spectral-centroid))))
+                   `((:rms . ,(get-kr-standard-descriptor :rms))
+                     (:spectral-centroid . ,(get-kr-standard-descriptor
+                                             :spectral-centroid)))))
        (sndfile (make-sndfile (path-from-src-dir
                                "../examples/snd/kalimba.wav")))
        (hop-size 512)
@@ -106,19 +106,21 @@
 ;;; SYNOPSIS
 (defmethod analyse ((dnc description-corpus))
   ;;; ****
-  (loop for descr in (descriptors (descriptor-corpus dnc))
-        with result = '()
-        do
-           (push 
-            (make-instance 'description
-                           :sndfile (sndfile dnc)
-                           :descriptor descr
-                           :hop-size (hop-size dnc)
-                           :window-size (window-size dnc))
-            result)
-        finally
-           (setf (data dnc) result)
-           (return dnc)))
+  (let ((descriptors (descriptors (descriptor-corpus dnc))))
+    (loop for key in (assoc-keys descriptors)
+          for descr = (assoc-value descriptors key)
+          with result = '()
+          do
+             (push 
+              (make-instance 'description
+                             :sndfile (sndfile dnc)
+                             :descriptor descr
+                             :hop-size (hop-size dnc)
+                             :window-size (window-size dnc))
+              result)
+          finally
+             (setf (data dnc) result)
+             (return dnc))))
 
 
 

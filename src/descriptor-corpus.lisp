@@ -16,25 +16,31 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  01:06:40 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:06:19 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
 
 (defclass descriptor-corpus (named-object)
-  ;; a list of the descriptors to be used in this corpus
+  ;; an alist of the descriptors to be used in this corpus
   ((descriptors :accessor descriptors :initarg :descriptors :initform nil)))
 
 
 (defmethod initialize-instance :after ((dc descriptor-corpus) &rest initargs)
   (declare (ignore initargs))
   ;; sanity checks
-  (mapcar #'(lambda (x)
-              (unless (typep x 'descriptor)
-                (error "descriptor-corpus::initialize-instance: Every ~
+  (unless (alistp (slot-value dc 'descriptors))
+    (error "descriptor-corpus::initialize-instance: The descriptors must ~
+            given as an alist (key-value/descriptor pair). Yours is ~a"
+           (type-of (slot-value dc 'descriptors))))
+  (let ((descr (slot-value dc 'descriptors)))
+    (loop for key in (assoc-keys descr)
+          for val = (assoc-value descr key)
+          do
+             (unless (typep val 'descriptor)
+               (error "descriptor-corpus::initialize-instance: Every ~
                         element of the descriptors list has to be type of ~
-                        DESCRIPTOR")))
-          (slot-value dc 'descriptors))
+                        DESCRIPTOR. Yours is ~a" (type-of val)))))
   (setf (slot-value dc 'data) (slot-value dc 'descriptors)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,9 +66,9 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let ((ds (list
-           (get-kr-standard-descriptor :spectral-centroid)
-           (get-kr-standard-descriptor :rms))))
+(let ((ds `((:spectral-centroid . ,(get-kr-standard-descriptor
+                                   :spectral-centroid))
+            (:rms . ,(get-kr-standard-descriptor :rms)))))
   (length (descriptors (make-descriptor-corpus ds))))
 ;; => 2
 |#
@@ -70,9 +76,9 @@
 (defun make-descriptor-corpus (descriptors
                                &key (id nil))
   ;;; ****
-  (unless (listp descriptors)
+  (unless (alistp descriptors)
     (error "descriptor-corpus::make-descriptor-corpus: The descriptors must be~
-            of type LIST"))
+            of type ALIST"))
   (make-instance 'descriptor-corpus
                  :descriptors descriptors
                  :id id))

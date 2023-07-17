@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Utility functions for klitter.
 ;;;
-;;; $$ Last modified:  10:50:40 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:00:16 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -299,6 +299,43 @@
   ;;; ****
   (and (listp object)
        (every #'consp object)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* utilities/assoc-keys
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; Returns a list with all keys of an alist. 
+;;;
+;;; ARGUMENTS
+;;; An alist. 
+;;; 
+;;; RETURN VALUE
+;;; A list with keys of the alist.
+;;;
+;;; EXAMPLE
+#|
+(let ((lst '((:test . 12)
+             (:value2 . 13)
+             (:something . 'of-importance))))
+  (assoc-keys lst))
+
+;; => '(:TEST :VALUE2 :SOMETHING)
+|#
+;;; SYNOPSIS
+(defun assoc-keys (alist)
+  ;;; ****
+  ;; sanity checks
+  (unless (alistp alist)
+    (error "utilities::assoc-keys: The value is not of type alist."))
+  (loop for item in alist
+        collect
+        (car item)))
 
 
 
