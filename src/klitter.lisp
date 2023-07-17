@@ -18,12 +18,13 @@
 ;;; [schwarz2006]: Schwarz, Diemo. 2006. „Concatenative Sound Synthesis:
 ;;; The Early Years“. Journal of New Music Research 35 (1): 3–22.
 ;;; https://doi.org/10.1080/09298210600696857.
-
+;;; [sturm2004]: Sturm, Bob. 2004. „MATConcat: An Application for Exploring
+;;; Concatenative Sound Synthesis Using MATLAB“.
 ;;;
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  20:58:39 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  21:39:45 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
