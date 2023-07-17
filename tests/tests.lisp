@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  11:10:00 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  12:53:52 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -195,6 +195,15 @@
                              :sndfile sndfile
                              :descriptor-corpus dr-corpus)))
     (is (= 2 (length (klitter::data dnc))))))
+
+
+;;; test get-segments
+;;; RP  Mon Jul 17 12:53:01 2023
+(test test-get-segments
+  (let* ((sndfile (klitter::make-sndfile (test-pathname "snd/kalimba.wav")))
+         (env '(0 .02 20 .04 50 .06 80 .03 100 .01))
+         (result (klitter::get-segments sndfile env)))
+    (is (listp result))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp

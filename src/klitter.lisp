@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  12:49:20 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  12:51:48 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -47,7 +47,7 @@
 ;;;
 ;;; EXAMPLE
 #|
-(let* ((sndfile (make-sndfile
+(let ((sndfile (make-sndfile
                  (path-from-same-dir "../examples/snd/kalimba.wav")))
        (env '(0 .02 20 .04 50 .06 80 .03 100 .01)))
   (get-segments sndfile env))
@@ -74,8 +74,16 @@
           finally
              (return (reverse result)))))
                                          
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; get segments from description-corpus
+;;; RP  Mon Jul 17 12:51:38 2023
+
+(defmethod get-segments ((obj description-corpus) env)
+  (get-segments (sndfile obj) env))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
