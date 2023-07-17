@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  02:08:35 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  02:17:40 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -99,7 +99,7 @@
                            :hop-size hop-size
                            :sndfile sndfile
                            :descriptor-corpus dr-corpus)))
-  (print (length (data dnc))))
+  (print (data dnc)))
 
 ;; => 2
 |#
