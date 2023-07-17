@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  13:39:06 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  14:15:20 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -105,7 +105,9 @@
                                    :hop-size hop
                                    :sndfile sndfile
                                    :descriptor descriptor)))
-  (data description))
+  (get-range description))
+
+;; => (0.0 0.195491)
 |#
 ;;; SYNOPSIS
 (defmethod analyse ((dn description) &key args)
@@ -118,6 +120,16 @@
          (result (funcall descriptor-fun sndfile hop-size window-size)))
     ;;update data slot in dn object
     (setf (data dn) result)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Returns the value range as a list '(min max)
+;;; RP  Mon Jul 17 14:12:09 2023
+
+(defmethod get-range ((dn description))
+  ;;; ****
+  (let* ((data (data dn))
+         (vals (mapcar #'second data)))
+    (list (apply #'min vals) (apply #'max vals))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -140,10 +152,6 @@
 ;;; RETURN VALUE
 ;;; A description object.
 ;;;
-;;; EXAMPLE
-
-
-
 ;;; SYNOPSIS
 (defun make-description (sndfile descriptor hop-size window-size)
   ;;; ****

@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  13:15:42 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  14:23:29 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -83,7 +83,7 @@
 ;;;
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
-;;; - :verbose. Print the status of the analysis. Default = T.
+;;; - :verbose. Print the status of the analysis. Default = NIL.
 ;;; 
 ;;; RETURN VALUE
 ;;; The updated description-corpus object. 
@@ -108,7 +108,7 @@
 ;; => (:SPECTRAL-CENTROID :RMS)
 |#
 ;;; SYNOPSIS
-(defmethod analyse ((dnc description-corpus) &key (verbose t))
+(defmethod analyse ((dnc description-corpus) &key (verbose nil))
   ;;; ****
   (let ((descriptors (descriptors (descriptor-corpus dnc))))
     (loop for key in (assoc-keys descriptors)

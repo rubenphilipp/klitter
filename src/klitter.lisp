@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  13:45:45 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  17:29:52 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -113,9 +113,6 @@
 ;;;                (:descriptorn . valuen)))
 ;;;   ...)
 ;;;
-;;; EXAMPLE
-
-
 ;;; SYNOPSIS
 (defmethod get-feature-vectors-from-target ((descr description-corpus) segments)
   ;;; ****
@@ -137,11 +134,154 @@
                              (nearest (sc::nearest onset dn-onsets))
                              (pos (position nearest dn-onsets))
                              (value (cdr (nth pos data))))
-                        `(,key . ,value)))))))
-                      
+                        (cons key value)))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* klitter/get-candidates-from-feature-vector
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; This methods performs a search for matches of a target feature-vector
+;;; (cf. get-feature-vectors-from-target) in a description-corpus. It then
+;;; returns a list of the following form:
+;;; '((tfv-onset-n
+;;;   ((c-onset-n ((:descriptor-n . value-n) ...))
+;;;    ...)
+;;;   ...)
+;;;
+;;; - tfv-onset is the onset time in the target feature-vector
+;;; - c-onset is the onset time in the sndfile of the description-corpus object.
+;;; - The alist contains the feature-values of the frame in the sndfile 
+;;;   described in the description-corpus object.
+;;;
+;;; The search is performed by looking up for frames in the description-corpus
+;;; that match the target feature-vector within a given tolerance (relative
+;;; to the range of the feature values. 
+;;;
+;;; ARGUMENTS
+;;; - A description-corpus object.
+;;; - A target feature-vector (e.g. generated via
+;;;   get-feature-vectors-from-target)
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :features. A list with the ids of features to be included in the
+;;;   matching process. Default = '()
+;;; - :tolerance. An alist of the form '((:descriptor-n . 0.2) ...)
+;;;   The descriptor must be named according to the descriptor name of the
+;;;   description-corpus. The value is relative to the value range. When
+;;;   a descriptor is not present in this alist, the :default-tolerance will
+;;;   be applied. Default = '()
+;;; - :default-tolerance. This is a number which is the default tolerance,
+;;;   applied to all descriptors which are not explicitly allocated a tolerance
+;;;   value via :tolerance.
+;;; 
+;;; RETURN VALUE
+;;; A list of lists of the form as described above. 
+;;;
+;;; EXAMPLE
+
+
+;;; SYNOPSIS
+(defmethod get-candidates-from-feature-vector ((dc description-corpus)
+                                               target-vector
+                                               &key
+                                                 (features '())
+                                                 (tolerance '())
+                                                 (default-tolerance 0.0))
+  ;;; ****
+  ;; sanity checks
+  (unless (alistp tolerance)
+    (error "klitter::get-candidates-from-feature-vector: :tolerance must ~
+            be of type ALIST, not ~a" (type-of tolerance)))
+  (unless (listp features)
+    (error "klitter::get-candidates-from-feature-vector: :tolerance must ~
+            be of type LIST, not ~a" (type-of tolerance)))
+  (let* ((descriptors (descriptors (descriptor-corpus dc)))
+         (descriptor-keys (assoc-keys descriptors))
+         (ranges (loop for key in descriptor-keys
+                       for description = (assoc-value (data dc) key)
+                       collect
+                       `(,key . ,(get-range description))))
+         (tolerance-abs (loop for key in descriptor-keys
+                              for tval = (assoc-value tolerance key)
+                              for range = (assoc-value ranges key)
+                              collect
+                              (cons key
+                                    (if tval
+                                        (* tval
+                                           (- (second range) (first range)))
+                                        (* default-tolerance
+                                           (- (second range)
+                                              (first range))))))))
+    ;; now loop through the target vector
+    ;; seg = segment / frame
+    (loop for seg in target-vector
+          for target-onset = (car seg)
+          for target-descriptors = (second seg)
+          with descriptor-keys = features
+          collect
+          (list
+           target-onset
+           ;; descriptor by descriptor
+           (loop for descriptor-key in descriptor-keys
+                 for descriptor-data = (data (assoc-value
+                                              (data dc)
+                                              descriptor-key))
+                 for target-val = (let ((tv (assoc-value
+                                             target-descriptors
+                                             descriptor-key)))
+                                    (if (listp tv) (car tv) tv))
+                 for dtolerance = (assoc-value tolerance-abs
+                                               descriptor-key)
+                 ;; index needed to check whether this is
+                 ;; the first search run
+                 for ki from 0
+                 ;; just the indices
+                 with matches = '()
+                 if (or (= ki 0) matches)
+                   do
+                      ;;(print (alistp target-descriptors))
+                      ;; just do a complete run the first time
+                      (if (= 0 ki)
+                          ;; do a complete search
+                          (loop for ddata in descriptor-data
+                                ;; index
+                                for i from 0
+                                for val = (second ddata)
+                                do
+                                   (when (sc::equal-within-tolerance
+                                          val
+                                          target-val
+                                          dtolerance)
+                                     (push i matches)))
+                          ;; when there are already matches just
+                          ;; validate the, for this descriptor and remove
+                          ;; index when matching
+                          (loop for match in matches
+                                for val = (second (nth match descriptor-data))
+                                with new-matches = '()
+                                do
+                                   (when (sc::equal-within-tolerance
+                                            val
+                                            target-val
+                                            dtolerance)
+                                     (push match new-matches))
+                                   (setf matches new-matches)))
+                 else
+                   do (error "klitter::get-candidates-from-feature-vector: ~
+                              No candidates found. Check your tolerance ~
+                              values.")
+                 finally (return (reverse matches)))))))
+                     
 
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; EOF klitter.lisp
+;;; EOF klitter.lisp1
