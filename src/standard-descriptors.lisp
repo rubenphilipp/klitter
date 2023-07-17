@@ -21,7 +21,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  11:35:27 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  13:46:49 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -277,23 +277,26 @@
 ;;; NB: Requires LibXtract Vamp plugins
 ;;;     https://code.soundsoftware.ac.uk/projects/vamp-libxtract-plugins
 ;;;
+;;; This is currently not used as it produces NILS which crash the selection
+;;; algorithm. 
+;;;
 ;;; USAGE
 ;;; (get-kr-standard-descriptor :inharmonicity)
 ;;; 
-(let* ((id 'inharmonicity)
-       (rdf-skeleton
-         (get-vamp-plugin-skeleton
-          "vamp:vamp-libxtract:spectral_inharmonicity:spectral_inharmonicity"))
-       (description "Extract the inharmonicity of an audio spectrum.")
-       (type :number)
-       (descriptor-gensym (generic-symbol id))
-       (rdf-file (path-from-src-dir "vamp/inharmonicity.n3"))
-       (descriptor-fun (make-vamp-descriptor-fun rdf-file
-                                                 :ignore-window-size t))
-       (descriptor (make-descriptor type descriptor-fun
-                                    :description description
-                                    :id id)))
-  (set-kr-standard-descriptor :inharmonicity descriptor))
+;; (let* ((id 'inharmonicity)
+;;        (rdf-skeleton
+;;          (get-vamp-plugin-skeleton
+;;           "vamp:vamp-libxtract:spectral_inharmonicity:spectral_inharmonicity"))
+;;        (description "Extract the inharmonicity of an audio spectrum.")
+;;        (type :number)
+;;        (descriptor-gensym (generic-symbol id))
+;;        (rdf-file (path-from-src-dir "vamp/inharmonicity.n3"))
+;;        (descriptor-fun (make-vamp-descriptor-fun rdf-file
+;;                                                  :ignore-window-size t))
+;;        (descriptor (make-descriptor type descriptor-fun
+;;                                     :description description
+;;                                     :id id)))
+;;   (set-kr-standard-descriptor :inharmonicity descriptor))
 ;;; ****
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

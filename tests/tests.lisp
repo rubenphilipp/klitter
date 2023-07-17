@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  12:53:52 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  13:38:43 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -163,7 +163,7 @@
          (result (funcall drf sndfile 512 1024)))
     (is (listp result))))
 
-;;; test descrtiptions1
+;;; test descriptions1
 ;;; RP  Sun Jul 16 23:42:06 2023
 (test test-descriptions1
   (let* ((descriptor (klitter::get-kr-standard-descriptor :spectral-centroid))

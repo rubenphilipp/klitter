@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  11:49:56 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  13:15:42 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -103,9 +103,9 @@
                            :hop-size hop-size
                            :sndfile sndfile
                            :descriptor-corpus dr-corpus)))
-  (print (data dnc)))
+  (print (assoc-keys (data dnc))))
 
-;; => 2
+;; => (:SPECTRAL-CENTROID :RMS)
 |#
 ;;; SYNOPSIS
 (defmethod analyse ((dnc description-corpus) &key (verbose t))
@@ -120,12 +120,13 @@
                           with descriptor: ~a"
                        (path (sndfile dnc))
                        (id descr)))
-             (push 
-              (make-instance 'description
-                             :sndfile (sndfile dnc)
-                             :descriptor descr
-                             :hop-size (hop-size dnc)
-                             :window-size (window-size dnc))
+             (push
+              `(,key
+                . ,(make-instance 'description
+                                  :sndfile (sndfile dnc)
+                                  :descriptor descr
+                                  :hop-size (hop-size dnc)
+                                  :window-size (window-size dnc)))
               result)
           finally
              (setf (data dnc) result)

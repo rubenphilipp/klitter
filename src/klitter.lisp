@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  12:51:48 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  13:45:45 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -84,6 +84,61 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****m* klitter/get-feature-vectors-from-target
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; This method returns for each onset in a list of segments (e.g. generated
+;;; via get-segments) an alist containing the target vector for each analysis
+;;; frame in a description-corpus object closest to the onset in the segment
+;;; list.
+;;;
+;;; ARGUMENTS
+;;; - A description-corpus object.
+;;; - A list of segments (e.g. generated via get-segments).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; none
+;;; 
+;;; RETURN VALUE
+;;; A list of lists of the form:
+;;; '((seg-onset1 ((:descriptor1 . value1)
+;;;                ...
+;;;                (:descriptorn . valuen)))
+;;;   ...)
+;;;
+;;; EXAMPLE
+
+
+;;; SYNOPSIS
+(defmethod get-feature-vectors-from-target ((descr description-corpus) segments)
+  ;;; ****
+  (unless (listp segments)
+    (error "klitter::get-feature-vectors-from-target: The segments must be of ~
+            type list."))
+  (let ((description-keys (assoc-keys (descriptors
+                                       (descriptor-corpus descr)))))
+    (loop for segment in segments
+          for onset = (first segment)
+          collect
+          (list onset
+                (loop for key in description-keys
+                      for description = (assoc-value (data descr) key)
+                      for data = (data description)
+                      collect
+                      ;; find closest time point and collect value
+                      (let* ((dn-onsets (mapcar #'car data))
+                             (nearest (sc::nearest onset dn-onsets))
+                             (pos (position nearest dn-onsets))
+                             (value (cdr (nth pos data))))
+                        `(,key . ,value)))))))
+                      
 
 
 
