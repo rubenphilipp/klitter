@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  11:51:27 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  13:39:06 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -116,7 +116,7 @@
          (hop-size (hop-size dn))
          (window-size (window-size dn))
          (result (funcall descriptor-fun sndfile hop-size window-size)))
-    update data slot in dn object
+    ;;update data slot in dn object
     (setf (data dn) result)))
 
 
