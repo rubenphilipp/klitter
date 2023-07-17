@@ -41,10 +41,15 @@
 <pre> Helper function in order to create a corpus of descriptors. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A list of descriptors. 
-</pre>
-<p class="item_name">OPTIONAL ARGUMENTS</p>
-<pre> keyword-arguments:
+<pre> - An alist of descriptors. Must be of type:
+   '((:key . <a href="./descriptor_lisp.html#robo13">descriptor</a>) ...)
+   E.g.:
+   `((<a href="./standard-descriptors_lisp.html#robo19">:rms</a> . ,(<a href="./standard-descriptors_lisp.html#robo23">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo19">:rms</a>))
+     (<a href="./standard-descriptors_lisp.html#robo20">:spectral-centroid</a> . ,(<a href="./standard-descriptors_lisp.html#robo23">get-kr-standard-descriptor</a>
+                            :spectral-centroid)))
+ 
+ Optional ARGUMENTS
+ keyword-arguments:
  - :id. The id of the <a href="./descriptor_lisp.html#robo13">descriptor</a>-corpus.
 </pre>
 <p class="item_name">RETURN VALUE</p>
@@ -64,7 +69,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/descriptor-corpus.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 11:12:04</p>
+<p>Generated from ./src/descriptor-corpus.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 11:13:40</p>
 </div> <!-- footer -->
 </body>
 </html>

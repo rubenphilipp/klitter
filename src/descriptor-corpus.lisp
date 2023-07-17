@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  11:06:19 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:13:32 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -55,9 +55,14 @@
 ;;; Helper function in order to create a corpus of descriptors. 
 ;;;
 ;;; ARGUMENTS
-;;; - A list of descriptors. 
+;;; - An alist of descriptors. Must be of type:
+;;;   '((:key . descriptor) ...)
+;;;   E.g.:
+;;;   `((:rms . ,(get-kr-standard-descriptor :rms))
+;;;     (:spectral-centroid . ,(get-kr-standard-descriptor
+;;;                            :spectral-centroid)))
 ;;; 
-;;; OPTIONAL ARGUMENTS
+;;; Optional ARGUMENTS
 ;;; keyword-arguments:
 ;;; - :id. The id of the descriptor-corpus.
 ;;; 
