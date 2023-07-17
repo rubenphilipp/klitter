@@ -16,7 +16,7 @@
 ;;; CREATED
 ;;; 2023-07-16
 ;;;
-;;; $$ Last modified:  11:10:43 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  11:40:15 Mon Jul 17 2023 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -122,6 +122,46 @@
              (setf (data dnc) result)
              (return dnc))))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* description-corpus/make-description-corpus
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-17
+;;; 
+;;; DESCRIPTION
+;;; Shortcut to create a description-corpus object. This could be used to
+;;; efficiently analyse a sndfile according to a set of descriptors given
+;;; via a descriptor-corpus object. 
+;;;
+;;; ARGUMENTS
+;;; - A descriptor-corpus object.
+;;; - A sndfile object.
+;;; - The hop-size for the analysis (in samples).
+;;; - The window-size for the analysis (in samples).
+;;; 
+;;; OPTIONAL ARGUMENTS
+;;; keyword-arguments:
+;;; - :id. The id of the description-corpus object. 
+;;; 
+;;; RETURN VALUE
+;;; A description-corpus object.
+;;;
+;;; SYNOPSIS
+(defun make-description-corpus (descriptor-corpus
+                                sndfile
+                                hop-size
+                                window-size
+                                &key (id nil))
+  ;;; ****
+  (make-instance 'description-corpus
+                 :sndfile sndfile
+                 :descriptor-corpus descriptor-corpus
+                 :hop-size hop-size
+                 :window-size window-size
+                 :id id))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -28,9 +28,9 @@
 <div id="content">
 <hr />
 <a name="description2fanalyse"></a>
-<a name="robo4"></a><h2>description/analyse [ Methods ]</h2>
+<a name="robo5"></a><h2>description/analyse [ Methods ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">description</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo13">description</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -38,37 +38,37 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> Performs an analysis of the <a href="./sndfile_lisp.html#robo14">sndfile</a> according to the <a href="./descriptor_lisp.html#robo13">descriptor</a> given and
+<pre> Performs an analysis of the <a href="./sndfile_lisp.html#robo15">sndfile</a> according to the <a href="./descriptor_lisp.html#robo14">descriptor</a> given and
  updates the slots of the object accordingly. 
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> The <a href="#robo12">description</a> object.
+<pre> The <a href="#robo13">description</a> object.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The updated <a href="#robo12">description</a> object. 
+<pre> The updated <a href="#robo13">description</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let* ((<a href="./descriptor_lisp.html#robo13">descriptor</a> (<a href="./standard-descriptors_lisp.html#robo23">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo19">:rms</a>))
-       (<a href="./sndfile_lisp.html#robo14">sndfile</a> (<a href="./sndfile_lisp.html#robo15">make-sndfile</a> (<a href="./utilities_lisp.html#robo31">path-from-src-dir</a>
+<pre class="source">(let* ((<a href="./descriptor_lisp.html#robo14">descriptor</a> (<a href="./standard-descriptors_lisp.html#robo24">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo20">:rms</a>))
+       (<a href="./sndfile_lisp.html#robo15">sndfile</a> (<a href="./sndfile_lisp.html#robo16">make-sndfile</a> (<a href="./utilities_lisp.html#robo32">path-from-src-dir</a>
                                "../examples/snd/kalimba.wav")))
        (hop 512)
        (window 1024)
-       (<a href="#robo12">description</a> (make-instance '<a href="#robo12">description</a>
+       (<a href="#robo13">description</a> (make-instance '<a href="#robo13">description</a>
                                    :window-size window
                                    :hop-size hop
-                                   :<a href="./sndfile_lisp.html#robo14">sndfile</a> <a href="./sndfile_lisp.html#robo14">sndfile</a>
-                                   :<a href="./descriptor_lisp.html#robo13">descriptor</a> <a href="./descriptor_lisp.html#robo13">descriptor</a>)))
-  (data <a href="#robo12">description</a>))
+                                   :<a href="./sndfile_lisp.html#robo15">sndfile</a> <a href="./sndfile_lisp.html#robo15">sndfile</a>
+                                   :<a href="./descriptor_lisp.html#robo14">descriptor</a> <a href="./descriptor_lisp.html#robo14">descriptor</a>)))
+  (data <a href="#robo13">description</a>))
 </pre>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defmethod <strong>analyse</strong> ((dn <a href="#robo12">description</a>))
+<pre class="source">(defmethod <strong>analyse</strong> ((dn <a href="#robo13">description</a>))
 </pre>
 
 <hr />
 <a name="description2fmake2ddescription"></a>
-<a name="robo5"></a><h2>description/make-description [ Functions ]</h2>
+<a name="robo6"></a><h2>description/make-description [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo12">description</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo13">description</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -76,27 +76,27 @@
 <pre> 2023-07-16
 </pre>
 <p class="item_name">DESCRIPTION</p>
-<pre> A shortcut to initialize a <a href="#robo12">description</a> object.
+<pre> A shortcut to initialize a <a href="#robo13">description</a> object.
 </pre>
 <p class="item_name">ARGUMENTS</p>
-<pre> - A <a href="./sndfile_lisp.html#robo14">sndfile</a> object.
- - A <a href="./descriptor_lisp.html#robo13">descriptor</a> object.
+<pre> - A <a href="./sndfile_lisp.html#robo15">sndfile</a> object.
+ - A <a href="./descriptor_lisp.html#robo14">descriptor</a> object.
  - A hop-size value (must be a number).
  - A window-size value (must be a number).
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> A <a href="#robo12">description</a> object.
+<pre> A <a href="#robo13">description</a> object.
 </pre>
 <p class="item_name">EXAMPLE</p>
 <p class="item_name">SYNOPSIS</p>
-<pre class="source">(defun <strong>make-description</strong> (<a href="./sndfile_lisp.html#robo14">sndfile</a> <a href="./descriptor_lisp.html#robo13">descriptor</a> hop-size window-size)
+<pre class="source">(defun <strong>make-description</strong> (<a href="./sndfile_lisp.html#robo15">sndfile</a> <a href="./descriptor_lisp.html#robo14">descriptor</a> hop-size window-size)
 </pre>
 
 <hr />
 <a name="named2dobject2fdescription"></a>
-<a name="robo12"></a><h2>named-object/description [ Classes ]</h2>
+<a name="robo13"></a><h2>named-object/description [ Classes ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo11">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo12">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
 <p class="item_name">NAME</p>
 <pre> <strong>description</strong>
 </pre>
@@ -109,17 +109,17 @@
 <p class="item_name">PURPOSE</p>
 <pre> Implementation of the <strong>description</strong> class and related methods. This class
  contains actual feature descriptions retrieved via descriptors and linked
- to a <a href="./sndfile_lisp.html#robo14">sndfile</a>. 
+ to a <a href="./sndfile_lisp.html#robo15">sndfile</a>. 
 
  CLASS HIERARCHY
- <a href="./named-object_lisp.html#robo11">named-object</a> -&gt; <strong>description</strong>
+ <a href="./named-object_lisp.html#robo12">named-object</a> -&gt; <strong>description</strong>
 
  $$ Last modified:  01:48:24 Mon Jul 17 2023 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/description.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 11:13:40</p>
+<p>Generated from ./src/description.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 11:41:54</p>
 </div> <!-- footer -->
 </body>
 </html>
