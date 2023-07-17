@@ -17,7 +17,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> description
 ;;;
-;;; $$ Last modified:  00:03:08 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  01:48:24 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -53,7 +53,7 @@
     (error "description::initialize-instance: hop- and window-size have to ~
             be of type number. hop-size: ~a; window-size: ~a"
            (slot-value dn 'hop-size) (slot-value dn 'window-size)))
-  just perform analysis when data is not already set
+  ;;just perform analysis when data is not already set
   (unless (slot-value dn 'data)
     (analyse dn)))
 
@@ -119,6 +119,39 @@
     update data slot in dn object
     (setf (data dn) result)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ****f* description/make-description
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
+;;;
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; DESCRIPTION
+;;; A shortcut to initialize a description object.
+;;;
+;;; ARGUMENTS
+;;; - A sndfile object.
+;;; - A descriptor object.
+;;; - A hop-size value (must be a number).
+;;; - A window-size value (must be a number).
+;;; 
+;;; RETURN VALUE
+;;; A description object.
+;;;
+;;; EXAMPLE
+
+
+
+;;; SYNOPSIS
+(defun make-description (sndfile descriptor hop-size window-size)
+  ;;; ****
+  (make-instance 'description
+                 :hop-size hop-size
+                 :window-size window-size
+                 :sndfile sndfile
+                 :descriptor descriptor))
 
   
 

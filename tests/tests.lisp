@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; Regression test suite for klitter.
 ;;;
-;;; $$ Last modified:  23:45:27 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  02:11:59 Mon Jul 17 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -176,6 +176,25 @@
                                      :sndfile sndfile
                                      :descriptor descriptor)))
     (is (listp (klitter::data description)))))
+
+;;; test description-corpus1
+;;; RP  Mon Jul 17 02:08:58 2023
+(test test-description-corpus1
+  (let* ((dr-corpus (klitter::make-descriptor-corpus
+                     (list
+                      (klitter::get-kr-standard-descriptor
+                       :rms)
+                      (klitter::get-kr-standard-descriptor
+                       :spectral-centroid))))
+         (sndfile (klitter::make-sndfile (test-pathname "snd/kalimba.wav")))
+         (hop-size 512)
+         (window-size 1024)
+         (dnc (make-instance 'klitter::description-corpus
+                             :window-size window-size
+                             :hop-size hop-size
+                             :sndfile sndfile
+                             :descriptor-corpus dr-corpus)))
+    (is (= 2 (length (klitter::data dnc))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EOF tests.lisp
