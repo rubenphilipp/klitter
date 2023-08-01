@@ -20,7 +20,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> sndfile
 ;;;
-;;; $$ Last modified:  19:46:47 Sat Jul 15 2023 CEST
+;;; $$ Last modified:  18:49:05 Tue Aug  1 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -159,6 +159,10 @@
         (error "sndfile::update: ~
                 Data slot of sndfile must be set to an existing sound file:~%~a"
                path))
+      ;; test if the path is of type string
+      (unless (stringp path)
+        (error "sndfile::update: The path is not of type STRING, but ~a"
+               (type-of path)))
       (unless (data sf)
         (setf (slot-value sf 'data) path))
       ;; get basic information of the sound file

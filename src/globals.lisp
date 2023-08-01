@@ -13,9 +13,9 @@
 ;;; Definition of the configuration data and globals for klitter.
 ;;;
 ;;; CLASS HIERARCHY
+;;; none. no classes defined. 
 ;;;
-;;;
-;;; $$ Last modified:  22:48:28 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  00:24:50 Mon Jul 24 2023 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
