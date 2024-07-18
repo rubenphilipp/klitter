@@ -1,22 +1,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; FILE
-;;; description-corpus.lisp
-;;;
+;;; ****c* named-object/description-corpus
 ;;; NAME
-;;; named-object/description-corpus
-;;;
-;;; DESCRIPTION
-;;; Implementation of the description-corpus class. This class contains the
-;;; descriptions for a single sndfile object (as a list of description objects)
-;;; retrieved from a descriptor-corpus object in the data slot. 
-;;;
+;;; description-corpus
+;;; 
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
 ;;; CREATED
 ;;; 2023-07-16
+;;; 
+;;; PURPOSE
+;;; Implementation of the description-corpus class. This class contains the
+;;; descriptions for a single sndfile object (as a list of description objects)
+;;; retrieved from a descriptor-corpus object in the data slot. 
 ;;;
-;;; $$ Last modified:  14:23:29 Mon Jul 17 2023 CEST
+;;; CLASS HIERARCHY
+;;; named-object -> description-corpus
+;;;
+;;; $$ Last modified:  18:13:00 Thu Jul 18 2024 CEST
+;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)

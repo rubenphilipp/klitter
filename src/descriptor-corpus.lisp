@@ -1,22 +1,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; FILE
-;;; descriptor-corpus.lisp
-;;;
+;;; ****c* named-object/descriptor-corpus
 ;;; NAME
-;;; named-object/descriptor-corpus
-;;;
-;;; DESCRIPTION
-;;; Implementation of the descriptor-corpus class. This class implements the
-;;; functionality of creating descriptor sets, to be used e.g. in
-;;; description-corpus objects.
-;;;
+;;; descriptor-corpus
+;;; 
 ;;; AUTHOR
 ;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
 ;;; CREATED
 ;;; 2023-07-16
+;;; 
+;;; PURPOSE
+;;; Implementation of the descriptor-corpus class. This class implements the
+;;; functionality of creating descriptor sets, to be used e.g. in
+;;; description-corpus objects.
 ;;;
-;;; $$ Last modified:  11:13:32 Mon Jul 17 2023 CEST
+;;; CLASS HIERARCHY
+;;; named-object -> descriptor-corpus
+;;;
+;;; $$ Last modified:  18:14:01 Thu Jul 18 2024 CEST
+;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)

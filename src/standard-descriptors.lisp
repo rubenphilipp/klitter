@@ -1,11 +1,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; FILE
-;;; standard-descriptors.lisp
-;;;
+;;; ****h* kr/standard-descriptors
 ;;; NAME
-;;; kr/standard-descriptors
+;;; standard-descriptors
+;;; 
+;;; AUTHOR
+;;; Ruben Philipp <me@rubenphilipp.com>
 ;;;
-;;; DESCRIPTION
+;;; CREATED
+;;; 2023-07-16
+;;; 
+;;; PURPOSE
 ;;; This file implements a set of standard descriptors using VAMP plugins.
 ;;; The selection of descriptors is loosely based on the implementation of
 ;;; MATConcat.
@@ -15,13 +19,11 @@
 ;;; NB: This file requires a few VAMP plugins to be present on your system
 ;;;     (cf. readme.org).
 ;;;
-;;; AUTHOR
-;;; Ruben Philipp <me@rubenphilipp.com>
+;;; CLASS HIERARCHY
+;;; none. no classes defined
 ;;;
-;;; CREATED
-;;; 2023-07-16
-;;;
-;;; $$ Last modified:  13:46:49 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  18:15:28 Thu Jul 18 2024 CEST
+;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)

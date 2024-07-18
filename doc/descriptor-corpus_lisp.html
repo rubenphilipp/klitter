@@ -28,9 +28,9 @@
 <div id="content">
 <hr />
 <a name="descriptor2dcorpus2fmake2ddescriptor2dcorpus"></a>
-<a name="robo8"></a><h2>descriptor-corpus/make-descriptor-corpus [ Functions ]</h2>
+<a name="robo9"></a><h2>descriptor-corpus/make-descriptor-corpus [ Functions ]</h2>
 
-<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo22">descriptor-corpus</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
 <pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
 </pre>
@@ -42,23 +42,23 @@
 </pre>
 <p class="item_name">ARGUMENTS</p>
 <pre> - An alist of descriptors. Must be of type:
-   '((:key . <a href="./descriptor_lisp.html#robo19">descriptor</a>) ...)
+   '((:key . <a href="./descriptor_lisp.html#robo21">descriptor</a>) ...)
    E.g.:
-   `((<a href="./standard-descriptors_lisp.html#robo25">:rms</a> . ,(<a href="./standard-descriptors_lisp.html#robo29">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo25">:rms</a>))
-     (<a href="./standard-descriptors_lisp.html#robo26">:spectral-centroid</a> . ,(<a href="./standard-descriptors_lisp.html#robo29">get-kr-standard-descriptor</a>
+   `((<a href="./standard-descriptors_lisp.html#robo28">:rms</a> . ,(<a href="./standard-descriptors_lisp.html#robo32">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo28">:rms</a>))
+     (<a href="./standard-descriptors_lisp.html#robo29">:spectral-centroid</a> . ,(<a href="./standard-descriptors_lisp.html#robo32">get-kr-standard-descriptor</a>
                             :spectral-centroid)))
  
  Optional ARGUMENTS
  keyword-arguments:
- - :id. The id of the <a href="./descriptor_lisp.html#robo19">descriptor</a>-corpus.
+ - :id. The id of the <a href="#robo22">descriptor-corpus</a>.
 </pre>
 <p class="item_name">RETURN VALUE</p>
-<pre> The <a href="./descriptor_lisp.html#robo19">descriptor</a>-corpus object. 
+<pre> The <a href="#robo22">descriptor-corpus</a> object. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((ds `((<a href="./standard-descriptors_lisp.html#robo26">:spectral-centroid</a> . ,(<a href="./standard-descriptors_lisp.html#robo29">get-kr-standard-descriptor</a>
+<pre class="source">(let ((ds `((<a href="./standard-descriptors_lisp.html#robo29">:spectral-centroid</a> . ,(<a href="./standard-descriptors_lisp.html#robo32">get-kr-standard-descriptor</a>
                                    :spectral-centroid))
-            (<a href="./standard-descriptors_lisp.html#robo25">:rms</a> . ,(<a href="./standard-descriptors_lisp.html#robo29">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo25">:rms</a>)))))
+            (<a href="./standard-descriptors_lisp.html#robo28">:rms</a> . ,(<a href="./standard-descriptors_lisp.html#robo32">get-kr-standard-descriptor</a> <a href="./standard-descriptors_lisp.html#robo28">:rms</a>)))))
   (length (descriptors (<strong>make-descriptor-corpus</strong> ds))))
 ;; =&gt; 2
 </pre>
@@ -67,9 +67,34 @@
                                &amp;key (id nil))
 </pre>
 
+<hr />
+<a name="named2dobject2fdescriptor2dcorpus"></a>
+<a name="robo22"></a><h2>named-object/descriptor-corpus [ Classes ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo17">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>descriptor-corpus</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-16
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> Implementation of the <strong>descriptor-corpus</strong> class. This class implements the
+ functionality of creating <a href="./descriptor_lisp.html#robo21">descriptor</a> sets, to be used e.g. in
+ <a href="./description-corpus_lisp.html#robo20">description-corpus</a> objects.
+
+ CLASS HIERARCHY
+ <a href="./named-object_lisp.html#robo17">named-object</a> -&gt; <strong>descriptor-corpus</strong>
+
+ $$ Last modified:  18:14:01 Thu Jul 18 2024 CEST
+</pre>
+
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/descriptor-corpus.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-07-17 21:39:55</p>
+<p>Generated from ./src/descriptor-corpus.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-18 18:16:43</p>
 </div> <!-- footer -->
 </body>
 </html>
