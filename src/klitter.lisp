@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  21:46:26 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  17:31:50 Thu Jul 18 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -55,7 +55,7 @@
 ;;; EXAMPLE
 #|
 (let ((sndfile (make-sndfile
-                 (path-from-same-dir "../examples/snd/kalimba.wav")))
+                 (path-from-src-dir "../examples/snd/kalimba.wav")))
        (env '(0 .02 20 .04 50 .06 80 .03 100 .01)))
   (get-segments sndfile env))
 |#

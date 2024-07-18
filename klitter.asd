@@ -12,7 +12,7 @@
 ;;; PURPOSE
 ;;; System definition (ASDF) for klitter.
 ;;;
-;;; $$ Last modified:  02:14:31 Mon Jul 17 2023 CEST
+;;; $$ Last modified:  18:08:57 Thu Jul 18 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -28,7 +28,7 @@
                "cl-ppcre"
                "cl-csv"
                "cl-fad"
-               ;;"clm" ;; TODO: needs to be fixed
+               "slippery-chicken"
                "parse-float")
   :pathname "src/"
   :components ((:file "package")
