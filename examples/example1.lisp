@@ -24,7 +24,7 @@
 ;;; CREATED
 ;;; 2024-07-18
 ;;;
-;;; $$ Last modified:  19:20:36 Thu Jul 18 2024 CEST
+;;; $$ Last modified:  19:44:06 Thu Jul 18 2024 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -73,7 +73,7 @@
        ;; envelopes (given as a list with alternating x y-pairs). In the latter
        ;; case, the segment's length varies throughout the sndfile. The x-range
        ;; will be scaled to the length of the respective sndfile.
-       (segments (get-segments target-description '(0 .02 50 .009 100 .02)))
+       (segments (get-segments target-description '(0 .01 50 .009 100 .005)))
        ;; Now, in order to perform the concatenation, we need to build a target
        ;; vector. The target vector contains information on the analysis data
        ;; (e.g. spectral centroid, loudness etc.) for each segment.
@@ -102,6 +102,12 @@
   (synthesize-score source-snd
                     candidates
                     :sco-file sco-file
+                    ;; Some random panning.
+                    ;; Please note that the arguments to the lambda function are
+                    ;; required but not used in this case. 
+                    :pan-fun #'(lambda (start fragdur idx totalfrag)
+                                 (declare (ignore start fragdur idx totalfrag))
+                                 (random 1.0))
                     :amp .8
                     :windowing-function '(100 0 8192 20 2)
                     :overlap .0002)
