@@ -6,11 +6,6 @@
 
 /klitter/ is a Common Lisp implementation of concatenative synthesis processes.
 
-* Introduction
-
-- TODO
-
-
 * Project structure
 
 - ~/src~. Contains the source code of the project.
@@ -21,8 +16,6 @@
 
 * Requirements
 
-- [[https://ccrma.stanford.edu/software/snd/snd/clm.html][Common Lisp Music (CLM)]]
-  - could be loaded via /ASDF/ thouh, this is not implemented yet
 - [[https://asdf.common-lisp.dev][ASDF]]
 - [[https://github.com/csound/csound][Csound]]
 - [[http://github.com/mdedwards/slippery-chicken][slippery-chicken]]
@@ -35,5 +28,5 @@ Tested with /SBCL/.
 
 
 #+begin_comment
-$$ Last modified:  12:22:23 Mon Jul 17 2023 CEST
+$$ Last modified:  20:31:26 Mon Jul 22 2024 CEST
 #+end_comment
