@@ -24,7 +24,7 @@
 ;;; CLASS HIERARCHY
 ;;; none. no classes defined
 ;;;
-;;; $$ Last modified:  17:31:50 Thu Jul 18 2024 CEST
+;;; $$ Last modified:  21:00:07 Mon Jul 22 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -66,13 +66,13 @@
     (setf env `(0 ,env 100 ,env)))
   (let* ((snd-dur (snd-duration obj))
          (env-interp
-           (sc::auto-scale-env env
+           (auto-scale-env env
                                :x-min 0.0
                                :x-max snd-dur
-                               :y-min (sc::env-y-min env)
-                               :y-max (sc::env-y-max env))))
+                               :y-min (env-y-min env)
+                               :y-max (env-y-max env))))
     (loop with onset = 0
-          for dur = (sc::interpolate onset env-interp)
+          for dur = (interpolate onset env-interp)
           with result = '()
           while (<= (+ onset dur) snd-dur)
           do
@@ -139,7 +139,7 @@
                       collect
                       ;; find closest time point and collect value
                       (let* ((dn-onsets (mapcar #'car data))
-                             (nearest (sc::nearest onset dn-onsets))
+                             (nearest (nearest onset dn-onsets))
                              (pos (position nearest dn-onsets))
                              (value (cdr (nth pos data))))
                         (cons key value)))))))
@@ -267,7 +267,7 @@
                             for i from 0
                             for val = (second ddata)
                             do
-                               (when (sc::equal-within-tolerance
+                               (when (equal-within-tolerance
                                       val
                                       target-val
                                       dtolerance)
@@ -280,7 +280,7 @@
                         for val = (second (nth match descriptor-data))
                         with new-matches = '()
                         do
-                           (when (sc::equal-within-tolerance
+                           (when (equal-within-tolerance
                                   val
                                   target-val
                                   dtolerance)
@@ -410,25 +410,25 @@
     ;; initialize and scale envelopes
     (setf amp (if (numberp amp)
                   `(0 ,amp ,total-fragments ,amp)
-                  (sc::auto-scale-env amp
+                  (auto-scale-env amp
                                       :x-min 0
                                       :x-max total-fragments
-                                      :y-min (sc::env-y-min amp)
-                                      :y-max (sc::env-y-max amp)))
+                                      :y-min (env-y-min amp)
+                                      :y-max (env-y-max amp)))
           overlap (if (numberp overlap)
                       `(0 ,overlap ,total-fragments ,overlap)
-                      (sc::auto-scale-env overlap
-                                          :x-min 0
-                                          :x-max total-fragments
-                                          :y-min (sc::env-y-min overlap)
-                                          :y-max (sc::env-y-max overlap)))
-          pitch (if (numberp pitch)
-                  `(0 ,pitch ,total-fragments ,pitch)
-                  (sc::auto-scale-env pitch
+                      (auto-scale-env overlap
                                       :x-min 0
                                       :x-max total-fragments
-                                      :y-min (sc::env-y-min pitch)
-                                      :y-max (sc::env-y-max pitch))))
+                                      :y-min (env-y-min overlap)
+                                      :y-max (env-y-max overlap)))
+          pitch (if (numberp pitch)
+                  `(0 ,pitch ,total-fragments ,pitch)
+                  (auto-scale-env pitch
+                                  :x-min 0
+                                  :x-max total-fragments
+                                  :y-min (env-y-min pitch)
+                                  :y-max (env-y-max pitch))))
     ;; now start the synth-process
     (loop for i from 0 to (1- total-fragments)
           for fragment = (nth i candidate-list)
@@ -438,9 +438,9 @@
           for frag-dur = (second fragment)
           with st-time = start-offset
           for pan = (funcall pan-fun st-time frag-dur i total-fragments)
-          for e-amp = (sc::interpolate i amp :exp amp-exp)
-          for e-pitch = (sc::interpolate i pitch :exp pitch-exp)
-          for e-overlap = (sc::interpolate i overlap :exp overlap-exp)
+          for e-amp = (interpolate i amp :exp amp-exp)
+          for e-pitch = (interpolate i pitch :exp pitch-exp)
+          for e-overlap = (interpolate i overlap :exp overlap-exp)
           ;; the score events
           with sco-events = '()
           do
