@@ -12,14 +12,14 @@
 ;;; PURPOSE
 ;;; System definition (ASDF) for klitter.
 ;;;
-;;; $$ Last modified:  18:08:57 Thu Jul 18 2024 CEST
+;;; $$ Last modified:  20:32:45 Mon Jul 22 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; main system
 (defsystem "klitter"
   :description "Common Lisp implemetation of concatenative synthesis."
-  :version "0.0.1"
+  :version "0.1.0"
   :author "Ruben Philipp <me@rubenphilipp.com>"
   :license "GPL Version 2.0 or later"
   :serial nil ;; could also be T; TODO: test/elaborate
