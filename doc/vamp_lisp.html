@@ -53,7 +53,7 @@
 
 <hr />
 <a name="vamp2fchange2dvamp2dtransform2dparameter"></a>
-<a name="robo44"></a><h2>vamp/change-vamp-transform-parameter [ Functions ]</h2>
+<a name="robo48"></a><h2>vamp/change-vamp-transform-parameter [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -83,7 +83,7 @@
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>change-vamp-transform-parameter</strong> :window-size
                                  512
-                                 (<a href="#robo46">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan"))
+                                 (<a href="#robo50">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan"))
 ;; =&gt;
 ;; "@prefix xsd:      &lt;http://www.w3.org/2001/XMLSchema#&gt; .
 ;; @prefix <a href="#robo4">vamp</a>:     &lt;http://purl.org/ontology/<a href="#robo4">vamp</a>/&gt; .
@@ -110,7 +110,7 @@
 
 <hr />
 <a name="vamp2fdo2dvamp2ddescription"></a>
-<a name="robo45"></a><h2>vamp/do-vamp-description [ Functions ]</h2>
+<a name="robo49"></a><h2>vamp/do-vamp-description [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -145,9 +145,9 @@
 <pre class="source">(let* ((rdf-data
          (change-<a href="#robo4">vamp</a>-pars
           '((:hop-size 512) (:window-size 1024))
-          (<a href="#robo46">get-vamp-plugin-skeleton</a>
+          (<a href="#robo50">get-vamp-plugin-skeleton</a>
            "<a href="#robo4">vamp</a>:<a href="#robo4">vamp</a>-example-plugins:amplitudefollower:amplitude")))
-       (<a href="./sndfile_lisp.html#robo23">sndfile</a> (<a href="./utilities_lisp.html#robo39">path-from-same-dir</a> "../examples/snd/kalimba.wav"))
+       (<a href="./sndfile_lisp.html#robo23">sndfile</a> (<a href="./utilities_lisp.html#robo43">path-from-same-dir</a> "../examples/snd/kalimba.wav"))
        (rdf-file "/tmp/amp.n3"))
   ;; store RDF-file
   (with-open-file (stream rdf-file
@@ -169,7 +169,7 @@
 
 <hr />
 <a name="vamp2fget2dvamp2dplugin2dskeleton"></a>
-<a name="robo46"></a><h2>vamp/get-vamp-plugin-skeleton [ Functions ]</h2>
+<a name="robo50"></a><h2>vamp/get-vamp-plugin-skeleton [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -207,7 +207,7 @@
 
 <hr />
 <a name="vamp2fget2dvamp2dplugins"></a>
-<a name="robo47"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
+<a name="robo51"></a><h2>vamp/get-vamp-plugins [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -240,7 +240,7 @@
 
 <hr />
 <a name="vamp2fload2drdf2dfrom2dfile"></a>
-<a name="robo48"></a><h2>vamp/load-rdf-from-file [ Functions ]</h2>
+<a name="robo52"></a><h2>vamp/load-rdf-from-file [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -260,7 +260,7 @@
 </pre>
 <p class="item_name">EXAMPLE</p>
 <pre class="source">(<strong>load-rdf-from-file</strong>
- (<a href="#robo50">save-rdf-to-file</a> (<a href="#robo46">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan")))
+ (<a href="#robo54">save-rdf-to-file</a> (<a href="#robo50">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan")))
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>load-rdf-from-file</strong> (path)
@@ -268,7 +268,7 @@
 
 <hr />
 <a name="vamp2frun2dvamp2dtransform"></a>
-<a name="robo49"></a><h2>vamp/run-vamp-transform [ Functions ]</h2>
+<a name="robo53"></a><h2>vamp/run-vamp-transform [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -302,9 +302,9 @@
 <pre class="source">(let* ((rdf-data
          (change-<a href="#robo4">vamp</a>-pars
           '((:hop-size 512) (:window-size 1024))
-          (<a href="#robo46">get-vamp-plugin-skeleton</a>
+          (<a href="#robo50">get-vamp-plugin-skeleton</a>
            "<a href="#robo4">vamp</a>:<a href="#robo4">vamp</a>-example-plugins:amplitudefollower:amplitude")))
-       (<a href="./sndfile_lisp.html#robo23">sndfile</a> (<a href="./utilities_lisp.html#robo39">path-from-same-dir</a> "../examples/snd/kalimba.wav"))
+       (<a href="./sndfile_lisp.html#robo23">sndfile</a> (<a href="./utilities_lisp.html#robo43">path-from-same-dir</a> "../examples/snd/kalimba.wav"))
        (rdf-file "/tmp/amp.n3"))
   ;; store RDF-file
   (with-open-file (stream rdf-file
@@ -323,7 +323,7 @@
 
 <hr />
 <a name="vamp2fsave2drdf2dto2dfile"></a>
-<a name="robo50"></a><h2>vamp/save-rdf-to-file [ Functions ]</h2>
+<a name="robo54"></a><h2>vamp/save-rdf-to-file [ Functions ]</h2>
 
 <p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo4">vamp</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
 <p class="item_name">AUTHOR</p>
@@ -348,7 +348,7 @@
 <pre> The path to the file stored.
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(<strong>save-rdf-to-file</strong> (<a href="#robo46">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan"))
+<pre class="source">(<strong>save-rdf-to-file</strong> (<a href="#robo50">get-vamp-plugin-skeleton</a> "<a href="#robo4">vamp</a>:azi:azi:plan"))
 ;; =&gt; "/tmp/vamp426.n3"
 </pre>
 <p class="item_name">SYNOPSIS</p>
@@ -365,7 +365,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-18 18:16:43</p>
+<p>Generated from ./src/vamp.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-23 16:22:51</p>
 </div> <!-- footer -->
 </body>
 </html>

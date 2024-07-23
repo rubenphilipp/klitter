@@ -118,12 +118,12 @@
  
  (let* ((id 'inharmonicity)
         (rdf-skeleton
-          (<a href="./vamp_lisp.html#robo46">get-vamp-plugin-skeleton</a>
+          (<a href="./vamp_lisp.html#robo50">get-vamp-plugin-skeleton</a>
            "<a href="./vamp_lisp.html#robo4">vamp</a>:<a href="./vamp_lisp.html#robo4">vamp</a>-libxtract:spectral_inharmonicity:spectral_inharmonicity"))
         (<a href="./description_lisp.html#robo19">description</a> "Extract the inharmonicity of an audio spectrum.")
         (type :number)
-        (<a href="./descriptor_lisp.html#robo21">descriptor</a>-gensym (<a href="./utilities_lisp.html#robo37">generic-symbol</a> id))
-        (rdf-file (<a href="./utilities_lisp.html#robo40">path-from-src-dir</a> "<a href="./vamp_lisp.html#robo4">vamp</a>/inharmonicity.n3"))
+        (<a href="./descriptor_lisp.html#robo21">descriptor</a>-gensym (<a href="./utilities_lisp.html#robo39">generic-symbol</a> id))
+        (rdf-file (<a href="./utilities_lisp.html#robo44">path-from-src-dir</a> "<a href="./vamp_lisp.html#robo4">vamp</a>/inharmonicity.n3"))
         (<a href="./descriptor_lisp.html#robo21">descriptor</a>-fun (<a href="#robo33">make-vamp-descriptor-fun</a> rdf-file
                                                   :ignore-window-size t))
         (<a href="./descriptor_lisp.html#robo21">descriptor</a> (<a href="./descriptor_lisp.html#robo10">make-descriptor</a> type <a href="./descriptor_lisp.html#robo21">descriptor</a>-fun
@@ -266,7 +266,7 @@
 <pre> The (lambda) function name of the <a href="./descriptor_lisp.html#robo21">descriptor</a>-fun. 
 </pre>
 <p class="item_name">EXAMPLE</p>
-<pre class="source">(let ((fname (<a href="./utilities_lisp.html#robo37">generic-symbol</a> 'centroid))
+<pre class="source">(let ((fname (<a href="./utilities_lisp.html#robo39">generic-symbol</a> 'centroid))
       (rdf-file "/tmp/test.n3"))
   (<strong>make-vamp-descriptor-fun</strong> fname rdf-file :ignore-window-size nil))
 
@@ -299,7 +299,7 @@
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/standard-descriptors.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-18 18:16:43</p>
+<p>Generated from ./src/standard-descriptors.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-23 16:22:51</p>
 </div> <!-- footer -->
 </body>
 </html>
