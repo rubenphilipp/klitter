@@ -21,7 +21,7 @@
 ;;; CLASS HIERARCHY
 ;;; named-object -> descriptor
 ;;;
-;;; $$ Last modified:  21:33:28 Sun Jul 16 2023 CEST
+;;; $$ Last modified:  12:46:09 Fri Jul 26 2024 CEST
 ;;; ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -80,6 +80,8 @@
 ;;;   The timestamp is in seconds, the value corresponds to the type of the
 ;;;   descriptor, thus could be either a number (e.g. a float) or a string
 ;;;   (e.g. "metallic").
+;;;   NB: Have a look at standard-descriptors.lisp for some a few exemplary
+;;;   implementation of descriptor-functions. 
 ;;; 
 ;;; OPTIONAL ARGUMENTS
 ;;; keyword-arguments:
@@ -92,9 +94,9 @@
 ;;;
 ;;; SYNOPSIS
 (defun make-descriptor (type descriptor-fun
-                        &key (description "")
-                          id)
-  ;;; ****
+                             &key (description "")
+                             id)
+;;; ****
   ;; sanity checks
   (unless (functionp descriptor-fun)
     (error "descriptor::make-descriptor: The descriptor-fun must be a ~
