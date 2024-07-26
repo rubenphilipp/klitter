@@ -54,6 +54,8 @@
    The timestamp is in seconds, the value corresponds to the type of the
    <a href="#robo21">descriptor</a>, thus could be either a number (e.g. a float) or a string
    (e.g. "metallic").
+   NB: Have a look at <a href="./standard-descriptors_lisp.html#robo_top_of_doc">standard-descriptors.lisp</a> for some a few exemplary
+   implementation of <a href="#robo21">descriptor</a>-functions. 
 </pre>
 <p class="item_name">OPTIONAL ARGUMENTS</p>
 <pre> keyword-arguments:
@@ -66,8 +68,8 @@
 </pre>
 <p class="item_name">SYNOPSIS</p>
 <pre class="source">(defun <strong>make-descriptor</strong> (type <a href="#robo21">descriptor</a>-fun
-                        &amp;key (<a href="./description_lisp.html#robo19">description</a> "")
-                          id)
+                             &amp;key (<a href="./description_lisp.html#robo19">description</a> "")
+                             id)
 </pre>
 
 <hr />
@@ -96,12 +98,12 @@
  CLASS HIERARCHY
  <a href="./named-object_lisp.html#robo17">named-object</a> -&gt; <strong>descriptor</strong>
 
- $$ Last modified:  21:33:28 Sun Jul 16 2023 CEST
+ $$ Last modified:  12:46:09 Fri Jul 26 2024 CEST
 </pre>
 
 </div> <!-- content -->
 <div id="footer">
-<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-23 16:22:51</p>
+<p>Generated from ./src/descriptor.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2024-07-26 12:46:36</p>
 </div> <!-- footer -->
 </body>
 </html>
