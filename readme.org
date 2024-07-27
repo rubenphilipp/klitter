@@ -5,7 +5,7 @@
 #+startup: showall
 
 #+begin_comment
-$$ Last modified:  21:09:13 Mon Jul 22 2024 CEST
+$$ Last modified:  00:41:15 Sun Jul 28 2024 CEST
 #+end_comment
 
 /klitter/ is a Common Lisp implementation of concatenative synthesis processes.
@@ -29,6 +29,10 @@ $$ Last modified:  21:09:13 Mon Jul 22 2024 CEST
 
 
 Tested with /SBCL/.
+
+* Install
+
+Detailed installation instructions can be found here: [[install.org]]
 
 * Colophon
 
