@@ -24,7 +24,7 @@
 ;;; CREATED
 ;;; 2024-07-18
 ;;;
-;;; $$ Last modified:  19:03:03 Tue Jul 23 2024 CEST
+;;; $$ Last modified:  15:40:49 Sun Jul 28 2024 CEST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (in-package :klitter)
@@ -73,7 +73,7 @@
        ;; envelopes (given as a list with alternating x y-pairs). In the latter
        ;; case, the segment's length varies throughout the sndfile. The x-range
        ;; will be scaled to the length of the respective sndfile.
-       (segments (get-segments target-description '(0 .01 50 .009 100 .005)))
+       (segments (get-segments target-description '(0 .001 50 .0005 100 .001)))
        ;; Now, in order to perform the concatenation, we need to build a target
        ;; vector. The target vector contains information on the analysis data
        ;; (e.g. spectral centroid, loudness etc.) for each segment.
@@ -92,7 +92,7 @@
                     :features '(:rms :spectral-centroid :f0)
                     :tolerance '((:rms . 0.01)
                                  (:f0 . 0.8)
-                                 (:spectral-centroid . 0.1)
+                                 (:spectral-centroid . 0.01)
                                  ;; these will currently be ignored
                                  ;; (cf. :features) but could be included by
                                  ;; extending the :features list.
@@ -109,8 +109,14 @@
                                  (declare (ignore start fragdur idx totalfrag))
                                  (random 1.0))
                     :amp .8
+                    ;; The windowing function corresponds to a Csound GEN table.
+                    ;; The elements of the list will be converted to a proper
+                    ;; ftable definition.
+                    ;; The following parameters relate to GEN20 (cf. the Csound-
+                    ;; manual):
+                    ;; '(# time size window max [opt])
                     :windowing-function '(100 0 8192 20 2)
-                    :overlap .0002)
+                    :overlap .00002)
   ;; Write a WAV-file using Csound and the example synth-implementation
   ;; (synth1.orc). 
   (shell (get-kr-config :csound-command)
