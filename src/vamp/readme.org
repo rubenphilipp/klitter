@@ -1,7 +1,0 @@
-#+title: VAMP
-#+author: Ruben Philipp
-#+date: 2023-07-16
-#+startup: showall 
-
-This directory contains RDF-files for the standard-descriptors (cf.
-~src/standard-descriptors.lisp~).

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>sndfile.lisp</title>
+<!-- Source: ./src/sndfile.lisp -->
+<!-- Generated with ROBODoc Version 4.99.45 (Mar 12 2025) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="./masterindex.html#top">Index</a>
+<a class="menuitem" href="./robo_classes.html#top">Classes</a>
+<a class="menuitem" href="./robo_functions.html#top">Functions</a>
+<a class="menuitem" href="./robo_modules.html#top">Modules</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_variables.html#top">Variables</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="named2dobject2fsndfile"></a>
+<a name="robo23"></a><h2>named-object/sndfile [ Classes ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./named-object_lisp.html#robo17">named-object</a> ] [ <a href="./robo_classes.html#robo_top_of_doc">Classes</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> <strong>sndfile</strong>
+</pre>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">PURPOSE</p>
+<pre> Implementation of the <strong>sndfile</strong> class. This class holds general information
+ about sound files (e.g. duration, number of channels etc.) but does not
+ contain the sound file itself.
+
+ This implementation is loosely based on the <strong>sndfile</strong> class of
+ slippery-chicken (<a href="http://github.com/mdedwards/slippery-chicken)">http://github.com/mdedwards/slippery-chicken)</a>
+
+ CLASS HIERARCHY
+ <a href="./named-object_lisp.html#robo17">named-object</a> -&gt; <strong>sndfile</strong>
+
+ $$ Last modified:  18:49:05 Tue Aug  1 2023 CEST
+</pre>
+
+<hr />
+<a name="sndfile2fmake2dsndfile"></a>
+<a name="robo24"></a><h2>sndfile/make-sndfile [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo23">sndfile</a> ] [ <a href="./robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">AUTHOR</p>
+<pre> Ruben Philipp &lt;me@rubenphilipp.com&gt;
+</pre>
+<p class="item_name">CREATED</p>
+<pre> 2023-07-15
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This is a helper function in order to create an instance of the
+ <a href="#robo23">sndfile</a>-class.
+</pre>
+<p class="item_name">ARGUMENTS</p>
+<pre> The path to the sound file.
+</pre>
+<p class="item_name">OPTIONAL ARGUMENTS</p>
+<pre> - :id. An id for the object. Default = NIL
+ - :data. Additional data linked to the object. Default = the path of them
+   <a href="#robo23">sndfile</a>
+ - :duration. The desired duration of the <a href="#robo23">sndfile</a> (in seconds). This should
+   not be specified if :end has been specified. When neither :end nor
+   :duration is set, the sound file will be considered as having to be
+   considered until its end. Default = NIL
+ - :end. The desired end time of the <a href="#robo23">sndfile</a> (in seconds). This should not
+   be specified if :duration has been specified. Default = NIL
+ - :start. The desired start time (in seconds). Default = 0.0
+ - :amplitude. An amplitude scaler (used in some processes). Default = 1.0
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre> The <a href="#robo23">sndfile</a>-object. 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">(defun <strong>make-sndfile</strong> (path &amp;key id data duration end (start 0.0)
+                            (amplitude 1.0))
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/sndfile.lisp with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.45 on 2025-03-12 16:35:39</p>
+</div> <!-- footer -->
+</body>
+</html>
